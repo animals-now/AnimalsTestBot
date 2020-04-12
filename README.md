@@ -1,6 +1,7 @@
 # AnimalsTestBot
 
 Etgar22 and Challenge22 contain bots that sign up, check if the registration transfered to the correct sheet and send the result to another sheet called "Report".
+
 PetitionsTest contain bot that sign up to all petitions and check if the user got thanks email and if the user info transfered to salesforce.
 for every sign up saleforce got from test+???@animals-now.org it send email to our test email, so thats how the bot know if the sign up transfered to salesfoce or not.
 
