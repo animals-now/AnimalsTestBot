@@ -13,6 +13,8 @@ emailfunc.py - contain function to interact  with gmail API
 
 Etgar22FormTest.py - Etgar22 bot, contain a lot of explanations
 
+Etgar22HealthIssuesTest - Sign up to etgar22 with random healh issue
+
 Challenge22FormTest.py - Challenge22 bot
 
 PetitionsTest.py - Petitions bot
