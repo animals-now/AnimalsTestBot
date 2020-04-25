@@ -13,7 +13,7 @@ from time import sleep
 
 import sys
 sys.path.append('/home/maor_animals_now_org/pytest')
-from pytest import auth
+import auth
 
 def random_char(y):  # create random characters
     return ''.join(random.choice(string.ascii_letters) for x in range(y))
