@@ -4,7 +4,6 @@ from selenium.webdriver.chrome.options import Options
 
 import gspread
 
-
 from datetime import datetime
 import random
 from random import randint
