@@ -66,7 +66,7 @@ insertinfo()
 sleep(1)
 send()
 driver.quit()
-sleep(30)
+sleep(10)
 
 # sign up for teen's etgar
 driver = opendriver(site)
@@ -84,7 +84,7 @@ send()
 driver.quit()
 
 
-sleep(360)  # wait for the sign ups to insert in the sign ups form
+sleep(10)  # wait for the sign ups to insert in the sign ups form
 client = auth.get_service_sheet()  # open google sheet API client
 
 report_sheet = client.open("Report").sheet1  # open report sheet, will insert success or failure
