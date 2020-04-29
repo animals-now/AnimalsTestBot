@@ -10,13 +10,3 @@ auth.py - contain function create authorizations for google spreadsheets API and
 token.pickle - gmail API authorization #result of auth
 
 emailfunc.py - contain function to interact  with gmail API
-
-Etgar22FormTest.py - Etgar22 bot, contain a lot of explanations
-
-Etgar22HealthIssuesTest - Sign up to etgar22 with random healh issue
-
-Challenge22FormTest.py - Challenge22 bot
-
-PetitionsTest.py - Petitions bot
-
-creds.json, token.pickle and auth not found in git.
