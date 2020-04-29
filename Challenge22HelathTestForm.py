@@ -1,7 +1,7 @@
 import customFunc
 
 site = "https://challenge22.com/?utm_source=test&utm_medium=test&utm_campaign=test"
-sheet = "הרשמה לאתגר 22 -  ENGLISH NEW "
+sheet = " הרשמה לאתגר 22 - ENGLISH HEALTH"
 
 session = customFunc.webFunc(site)
 session.url()
