@@ -116,31 +116,58 @@ class webFunc:
         specific_issues_checkbox.click()
         sleep(1)
 
-        if random_issue == "tfa_96-L" or random_issue == "tfa_101-L":  # "מחלת מעי דלקתית, הפרעות אכילה מסוג אחר"
-            facebook_name_box = self.driver.find_elements_by_xpath('//input[@placeholder = "{}"]'.format(facebook_placeholder))
-            for box in facebook_name_box:
-                try:
-                    box.send_keys("test+bot" + "bodek")
-                except:
-                    pass
-        elif random_issue == "tfa_98-L" or random_issue == "tfa_102-L":  # "מעי רגיז נפיחות או רגישות אחרת, בעיית בריאות אחרת שיכולה להשפיע על התזונה"
-            pass
-        else:  # "עברת ניתוח בריאטרי"
-            time_pass_id = ["tfa_112-L", "tfa_113-L", "tfa_114-L"]
+#         if random_issue == "tfa_96-L" or random_issue == "tfa_101-L":  # "מחלת מעי דלקתית, הפרעות אכילה מסוג אחר"
+#             facebook_name_box = self.driver.find_elements_by_xpath('//input[@placeholder = "{}"]'.format(facebook_placeholder))
+#             for box in facebook_name_box:
+#                 try:
+#                     box.send_keys("test+bot" + "bodek")
+#                 except:
+#                     pass
+#         elif random_issue == "tfa_98-L" or random_issue == "tfa_102-L":  # "מעי רגיז נפיחות או רגישות אחרת, בעיית בריאות אחרת שיכולה להשפיע על התזונה"
+#             pass
+#         else:  # "עברת ניתוח בריאטרי"
+#             time_pass_id = ["tfa_112-L", "tfa_113-L", "tfa_114-L"]
+#             random_time_pass = random.choice(time_pass_id)
+#             time_pass_checkbox = self.driver.find_element_by_xpath(
+#                 '//label[@class="label postField"][@id="{}"]'.format(random_time_pass))
+#             time_pass_checkbox.click()
+#             if random_time_pass == "tfa_113-L":  # "מעל שנה (ללא סיבוכים מיוחדים)"
+#                pass
+#             else:  # "עד שנה, מעל שנה (עם סיבוכים מיוחדים)"
+#                 facebook_name_box = self.driver.find_elements_by_xpath('//input[@placeholder = "{}"]'.format(facebook_placeholder))
+#                 for box in facebook_name_box:
+#                     try:
+#                         box.send_keys("test+bot" + "bodek")
+#                     except:
+#                         pass
+        if random_issue == "tfa_97-L":  # "עברת ניתוח בריאטרי"
+            time_pass_id = ["tfa_114-L", "tfa_113-L", "tfa_114-L"]
             random_time_pass = random.choice(time_pass_id)
             time_pass_checkbox = self.driver.find_element_by_xpath(
-                '//label[@class="label postField"][@id="{}"]'.format(random_time_pass))
+                '//label[@id="{}"]'.format(random_time_pass))
             time_pass_checkbox.click()
             if random_time_pass == "tfa_113-L":  # "מעל שנה (ללא סיבוכים מיוחדים)"
-               pass
+                pass
             else:  # "עד שנה, מעל שנה (עם סיבוכים מיוחדים)"
-                facebook_name_box = self.driver.find_elements_by_xpath('//input[@placeholder = "{}"]'.format(facebook_placeholder))
+                facebook_name_box = self.driver.find_elements_by_xpath(
+                    '//input[@placeholder = "{}"]'.format(facebook_placeholder))
                 for box in facebook_name_box:
                     try:
                         box.send_keys("test+bot" + "bodek")
                     except:
                         pass
-
+        else:  # "כל שאר המחלות"
+            try:
+                facebook_name_box = self.driver.find_elements_by_xpath(
+                    '//input[@placeholder = "{}"]'.format(facebook_placeholder))
+                for box in facebook_name_box:
+                    try:
+                        box.send_keys("test+bot" + "bodek")
+                    except:
+                        self.info[2] = "Failed enter full facebook name"
+            except:
+                pass
+                
     def check_in_sheets(self, sheet):
         client = auth.get_service_sheet()  # open google sheet API client
         report_sheet = client.open("Report").sheet1  # open report sheet, will insert success or failure
