@@ -164,7 +164,7 @@ class webFunc:
                     try:
                         box.send_keys("test+bot" + "bodek")
                     except:
-                        self.info[2] = "Failed enter full facebook name"
+                        pass
             except:
                 pass
                 
