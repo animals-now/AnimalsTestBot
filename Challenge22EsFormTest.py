@@ -9,7 +9,6 @@ customFunc.sleep(6)
 session.insertinfo()
 session.ch_confirm_sixteen()
 session.send()
-ch_es_info = session.collectinfo()
 session.driver.quit()
 
 customFunc.sleep(300)
