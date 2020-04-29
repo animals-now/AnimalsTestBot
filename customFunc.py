@@ -109,7 +109,7 @@ class webFunc:
             facebook_placeholder = "Nombre completo y nombre en Facebook"
 
         self.send()
-        health_issues_id = ["tfa_96-L", "tfa_97-L", "tfa_98-L", "tfa_101-L", "tfa_102-L", ]
+        health_issues_id = ["tfa_96-L", "tfa_97-L", "tfa_98-L", "tfa_101-L", "tfa_102-L"]
         random_issue = random.choice(health_issues_id)
         specific_issues_checkbox = self.driver.find_element_by_xpath(
             '//label[@class="label postField"][@id="{}"]'.format(random_issue))
