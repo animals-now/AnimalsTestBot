@@ -11,8 +11,9 @@ from oauth2client.service_account import ServiceAccountCredentials
 from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
+import sys
+sys.path.append('/home/maor_animals_now_org/pytest')
 import auth
-from pprint import pprint
 
 
 service = ""
