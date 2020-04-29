@@ -14,3 +14,8 @@ session.driver.quit()
 
 customFunc.sleep(300)
 session.check_in_sheets(sheet)
+
+client = customFunc.auth.get_service_sheet()
+report_sheet = client.open("Report").sheet1
+row = ["Row below assign to Etgar22 Health issues"]
+report_sheet.insert_row(row, 2)
