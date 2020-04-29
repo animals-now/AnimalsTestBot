@@ -10,4 +10,6 @@ session.insertinfo()
 session.etgarconfirm()
 session.send()
 session.driver.quit()
+
+customFunc.sleep(300)
 session.check_in_sheets(sheet)
