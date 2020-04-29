@@ -153,6 +153,7 @@ class webFunc:
 
         try:
             cell = sign_up_sheet.find(self.info[2])  # search if the test email found in sign up form sheet
+              # sheet.delete_row(cell.row)
             report_sheet.insert_row(row_succeed, 2)  # if found insert: time, form name, succeed
         except gspread.CellNotFound:
             report_sheet.insert_row(row_failed, 2)  # if found insert: time, form name, failed
