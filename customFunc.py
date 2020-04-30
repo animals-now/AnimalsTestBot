@@ -176,15 +176,20 @@ class webFunc:
         sign_up_sheet = client.open(self.sheet).sheet1  # open sign up form sheet
         time_now = str(datetime.today())[0:16]
         row_failed = [time_now, self.sheet, self.info[2], "Sign up failed: not found in the sheet"]
-        row_succeed = [time_now, self.sheet, self.info[2], "Sign up succeed"]
-
+        row_succeed_all = [time_now, self.sheet, self.info[2], "Sign up succeed and removed from google sheet"]
+        row_succeed_partly = [time_now, self.sheet, self.info[2],
+                              "Sign up succeed but problem occur while removing from google sheet"]
         try:
             cell = sign_up_sheet.find(self.info[2])  # search if the test email found in sign up form sheet
-              # sheet.delete_row(cell.row)
-            report_sheet.insert_row(row_succeed, 2)  # if found insert: time, form name, succeed
+            rows_before_delete = len(sign_up_sheet.col_values(1))
+            sign_up_sheet.delete_row(cell.row)
+            rows_after_delete = len(sign_up_sheet.col_values(1))
+            if rows_before_delete - rows_after_delete > 1:
+                report_sheet.insert_row(row_succeed_partly, 2)
+            else:
+                report_sheet.insert_row(row_succeed_all, 2)
         except gspread.CellNotFound:
-            report_sheet.insert_row(row_failed, 2)  # if found insert: time, form name, failed
-
+            report_sheet.insert_row(row_failed, 2)
 
     def petitions_age(self):
         age_box = self.driver.find_element_by_xpath('//select[@placeholder="שנת לידה"]')
