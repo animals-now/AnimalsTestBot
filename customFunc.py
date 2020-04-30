@@ -177,19 +177,33 @@ class webFunc:
         time_now = str(datetime.today())[0:16]
         row_failed = [time_now, self.sheet, self.info[2], "Sign up failed: not found in the sheet"]
         row_succeed_all = [time_now, self.sheet, self.info[2], "Sign up succeed and removed from google sheet"]
-        row_succeed_partly = [time_now, self.sheet, self.info[2],
-                              "Sign up succeed but problem occur while removing from google sheet"]
+        row_remove_more = [time_now, self.sheet, self.info[2], "Sign up succeed but remove more that one row"]
+        row_not_remove = [time_now, self.sheet, self.info[2], "Sign up succeed but found test email"]
         try:
-            cell = sign_up_sheet.find(self.info[2])  # search if the test email found in sign up form sheet
+            sign_up_sheet.find(self.info[2])  # search if the test email found in sign up form sheet
             rows_before_delete = len(sign_up_sheet.col_values(1))
-            sign_up_sheet.delete_row(cell.row)
+            sign_up_sheet.delete_row(sign_up_sheet.find(self.info[2]).row)
             rows_after_delete = len(sign_up_sheet.col_values(1))
-            if rows_before_delete - rows_after_delete > 1:
-                report_sheet.insert_row(row_succeed_partly, 2)
-            else:
-                report_sheet.insert_row(row_succeed_all, 2)
+            gap = str(rows_before_delete - rows_after_delete)
+            row_failed.append(gap)  # adding the number of rows that remove
+            row_succeed_all.append(gap)
+            row_remove_more.append(gap)
+            row_not_remove.append(gap)
+            try:
+                sign_up_sheet.find(self.info[2])  # try to find the test email again
+                if rows_before_delete - rows_after_delete > 1:  # check if more then one row was delete
+                    report_sheet.insert_row(row_remove_more, 2)  # report that more then one row was delete
+                    report_sheet.insert_row(row_not_remove, 2)  # tell us the test email found after deleting
+                else:
+                    report_sheet.insert_row(row_not_remove, 2)  # tell us the test email found after deleting
+            except gspread.CellNotFound:
+                if rows_before_delete - rows_after_delete > 1:  # check if more then one row was delete
+                    report_sheet.insert_row(row_remove_more, 2)  # report that more then one row was delete
+                else:
+                    report_sheet.insert_row(row_succeed_all, 2)  # tell us that everything work right
         except gspread.CellNotFound:
-            report_sheet.insert_row(row_failed, 2)
+            report_sheet.insert_row(row_failed, 2)  # tell us that test email didn't found in the sheet
+
 
     def petitions_age(self):
         age_box = self.driver.find_element_by_xpath('//select[@placeholder="שנת לידה"]')
