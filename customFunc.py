@@ -196,7 +196,8 @@ class webFunc:
         send_button = self.driver.find_element_by_xpath('//button[@type="submit"]')
         send_button.click()
 
-    def check_in_gmail(self, email_list, petitions_list):
+    def check_in_gmail(self, email_list, petitions_list):  # check for if user got thank you email and if we got email
+        # from salesforce
         service = auth.get_service_gmail()  # open gmail API client
         client = auth.get_service_sheet()  # open google sheet API client
         report_sheet = client.open("Report").sheet1  # open report sheet, will insert success or failure
@@ -207,3 +208,6 @@ class webFunc:
             row_status = [str(datetime.today())[0:16], petitions_list[petitions_index], email_address, status]
             report_sheet.insert_row(row_status, 2)
             petitions_index += 1
+            if status != "Succeed! Thanks email and Salesforce email received":
+                emailfunc.send_emails(service, row_status)
+
