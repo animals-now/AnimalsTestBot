@@ -11,5 +11,5 @@ session.etgarconfirm()
 session.send()
 session.driver.quit()
 
-customFunc.sleep(300)
+customFunc.sleep(480)
 session.check_in_sheets(sheet)
