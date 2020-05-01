@@ -146,6 +146,7 @@ class webFunc:
                 
     def check_in_sheets(self, sheet):
         client = auth.get_service_sheet()  # open google sheet API client
+        service = auth.get_service_gmail() # open gmail Api
         report_sheet = client.open("Report").sheet1  # open report sheet, will insert success or failure
         self.sheet = sheet
 
