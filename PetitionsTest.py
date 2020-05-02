@@ -8,7 +8,7 @@ fish = "https://animals-now.org/investigations/fish/?utm_source=test&utm_medium=
 zoglobek = "https://animals-now.org/issues/zoglobek-lawsuit/?utm_source=test&utm_medium=test&utm_campaign=test"
 fur = "https://animals-now.org/issues/fur/?utm_source=test&utm_medium=test&utm_campaign=test"
 
-site_list = [turkey] #, live_transports, cages, protection_act, fish, zoglobek, fur]
+site_list = [turkey, live_transports, cages, protection_act, fish, zoglobek, fur]
 
 email_list = []  # list with the email used to sign up
 petitions_list = []  # list with link to petition that the bot signed up
