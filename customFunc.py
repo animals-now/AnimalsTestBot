@@ -39,7 +39,7 @@ class webFunc:
         letters = "abcdefghijklmnopqrstuvwxyz"
         chars = ''
         for x in range(length):
-        chars += chars.join(letters[randint(0, 25)])
+            chars += chars.join(letters[randint(0, 25)])
     return chars
 
     def insertinfo(self):  # insert info and click on the confrim check box
