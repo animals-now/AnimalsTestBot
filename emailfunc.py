@@ -66,8 +66,8 @@ def petition_emails(service, user_id, search_string):  # tell how many emails we
     except (errors.HttpError, errors):
         return 'Damn!..., an error has occured... %s' % errors
     
-def web_error_email(service, error, site):
-    message_text = "Error: " + error + ", Website: " + site
+def web_error_email(service, error, site, header):
+    message_text = "Error: " + error + ", Website: " + site + ", header: " + header
     sender = "me"
     subject = "WebSite Error"
     to_list = ["maor@animals-now.org"]
