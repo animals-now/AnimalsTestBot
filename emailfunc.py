@@ -40,11 +40,11 @@ def send_message(service, user_id, message):
         print('An error occurred: %s' % error)
 
 
-def send_emails(service, row):
+def signup_failed_email(service, row):
     message_text = "Sheet\Petition: " + row[1] + " Email: " + row[2] + " Reason: " + row[3]
     sender = "me"
     subject = "Sign Up Failed"
-    to_list = ["maor@animals-now.org", ]
+    to_list = ["maor@animals-now.org"]
     user_id = "me"
 
     for to in to_list:
@@ -52,7 +52,7 @@ def send_emails(service, row):
         send_message(service, user_id, message)
 
 
-def two_emails(service, user_id, search_string):  # tell how many emails we found for search in gmail
+def petition_emails(service, user_id, search_string):  # tell how many emails we found for search in gmail
     try:
         search_id = service.users().messages().list(userId=user_id, q=search_string).execute()
         number_results = int(search_id['resultSizeEstimate'])
