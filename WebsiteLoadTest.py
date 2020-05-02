@@ -8,7 +8,7 @@ ch = "https://challenge22.com/?utm_source=test&utm_medium=test&utm_campaign=test
 ch_es = "https://challenge22.com/es/?utm_source=test&utm_medium=test&utm_campaign=test"
 animals = "https://animals-now.org/?utm_source=test&utm_medium=test&utm_campaign=test"
 anonymous = "https://anonymous.org.il/?utm_source=test&utm_medium=test&utm_campaign=test"
-veg = 'https://veg.co.il/?utm_source=test&utm_medium=test&utm_campaign=test'
+veg = "https://veg.co.il/?utm_source=test&utm_medium=test&utm_campaign=test"
 
 site_list = [etgar, ch, ch_es, animals, anonymous, veg]
 
