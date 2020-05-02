@@ -171,20 +171,20 @@ class webFunc:
                 if rows_before_delete - rows_after_delete > 1:  # check if more then one row was delete
                     report_sheet.insert_row(row_remove_more, 2)  # report that more then one row was delete
                     report_sheet.insert_row(row_not_remove, 2)  # tell us the test email found after deleting
-                    emailfunc.send_emails(service, row_remove_more)  # send email, open the func in order to see to who
-                    emailfunc.send_emails(service, row_not_remove)
+                    emailfunc.signup_failed_email(service, row_remove_more)  # send email, open the func in order to see to who
+                    emailfunc.signup_failed_email(service, row_not_remove)
                 else:
                     report_sheet.insert_row(row_not_remove, 2)  # tell us the test email found after deleting
-                    emailfunc.send_emails(service, row_not_remove)
+                    emailfunc.signup_failed_email(service, row_not_remove)
             except gspread.CellNotFound:
                 if rows_before_delete - rows_after_delete > 1:  # check if more then one row was delete
                     report_sheet.insert_row(row_remove_more, 2)  # report that more then one row was delete
-                    emailfunc.send_emails(service, row_remove_more)
+                    emailfunc.signup_failed_email(service, row_remove_more)
                 else:
                     report_sheet.insert_row(row_succeed_all, 2)  # tell us that everything work right
         except gspread.CellNotFound:
             report_sheet.insert_row(row_failed, 2)  # tell us that test email didn't found in the sheet
-            emailfunc.send_emails(service, row_failed)            
+            emailfunc.signup_failed_email(service, row_failed)            
 
 
     def petitions_age(self):
@@ -205,10 +205,10 @@ class webFunc:
 
         petitions_index = 0
         for email_address in email_list:
-            status = emailfunc.two_emails(service, 'me', email_address)
+            status = emailfunc.petition_emails(service, 'me', email_address)
             row_status = [str(datetime.today())[0:16], petitions_list[petitions_index], email_address, status]
             report_sheet.insert_row(row_status, 2)
             petitions_index += 1
             if status != "Succeed! Thanks email and Salesforce email received":
-                emailfunc.send_emails(service, row_status)
+                emailfunc.signup_failed_email(service, row_status)
 
