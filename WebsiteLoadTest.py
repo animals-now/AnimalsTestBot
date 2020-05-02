@@ -4,7 +4,7 @@ from requests.exceptions import ConnectionError
 import random
 import time
 
-etgar = "https://etgar22.co.il/?utm_source=test&utm_medium=test&utm_campaign=test"
+etgar = "https://etgar22.co.il/dshfghjsgjzsfgjgf/?utm_source=test&utm_medium=test&utm_campaign=test"
 ch = "https://challenge22.com/?utm_source=test&utm_medium=test&utm_campaign=test"
 ch_es = "https://challenge22.com/es/?utm_source=test&utm_medium=test&utm_campaign=test"
 animals = "https://animals-now.org/?utm_source=test&utm_medium=test&utm_campaign=test"
@@ -39,19 +39,21 @@ header_list = [
                 'like Gecko) Chrome/33.0.1750.517 Safari/537.36'}]
 
 for site in site_list:
+    header = random.choice(header_list)
     start = time.time()
     try:
-        request = requests.get(site, headers=random.choice(header_list))
+        request = requests.get(site, headers=header)
         if request.status_code == 200:
             pass
         else:
-            customFunc.emailfunc.web_error_email(service, str(request.status_code), site)
+            customFunc.emailfunc.web_error_email(service, str(request.status_code),site ,str(header))
 
     except ConnectionError:
-        customFunc.emailfunc.web_error_email(service, 'Web site does not exist', site)
+        customFunc.emailfunc.web_error_email(service, 'Web site does not exist', site, str(header))
     end = time.time()
 
     if end - start > 15:
         error = 'to much time to load - : ' + str(end - start)[0:4] + ' seconds'
-        customFunc.emailfunc.web_error_email(service, error, site)
-    customFunc.sleep(10)   
+        customFunc.emailfunc.web_error_email(service, error, site, str(header))
+    customFunc.sleep(10)
+
