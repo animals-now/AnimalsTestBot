@@ -22,7 +22,7 @@ for site in site_list:  # sign up to petitions in the site list, for each sign u
     email_list.append(session.info[2])
     petitions_list.append(site)
     session.driver.quit()
-    customFunc.sleep(30)
+    customFunc.sleep(45)
 
 customFunc.sleep(240)
 
