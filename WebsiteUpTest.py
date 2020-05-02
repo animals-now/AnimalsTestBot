@@ -27,5 +27,6 @@ for site in site_list:
     if end - start > 15:
         error = 'to much time to load - : ' + str(end - start)[0:4] + ' seconds'
         customFunc.emailfunc.web_error_email(service, error, site)
+    customFunc.sleep(10)
 
 
