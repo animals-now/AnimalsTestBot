@@ -15,8 +15,7 @@ session.driver.quit()
 customFunc.sleep(480)
 session.check_in_sheets(sheet)
 
-client = customFunc.auth.get_service_sheet()
-report_sheet = client.open("Report").sheet1
+client = customFunc.auth.get_service_sheet()  # addindg to form name in the report "health issue" because etgar22 and
+report_sheet = client.open("Report").sheet1  # etgar22 healh issue have the same form
 time_now = str(customFunc.datetime.today())[0:16]
-row = [time_now, "Row below assign to Etgar22 Health issues"]
-report_sheet.insert_row(row, 2)
+report_sheet.update_cell(report_sheet.find(session.info[2]).row, report_sheet.find(session.info[2]).col-1, (sheet +" - health issue"))
