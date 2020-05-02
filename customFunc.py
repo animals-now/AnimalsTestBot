@@ -36,9 +36,9 @@ class webFunc:
 
     @staticmethod
     def random_char(length):  # create random characters
-    letters = "abcdefghijklmnopqrstuvwxyz"
-    chars = ''
-    for x in range(length):
+        letters = "abcdefghijklmnopqrstuvwxyz"
+        chars = ''
+        for x in range(length):
         chars += chars.join(letters[randint(0, 25)])
     return chars
 
