@@ -36,15 +36,19 @@ class webFunc:
         self.driver.execute_script("window.location = '{}'".format(self.site))
 
     @staticmethod
-    def random_char(y):  # create random characters
-        return ''.join(random.choice(string.ascii_letters) for x in range(y))
+    def random_char(length):  # create random characters
+    letters = "abcdefghijklmnopqrstuvwxyz"
+    chars = ''
+    for x in range(length):
+        chars += chars.join(letters[randint(0, 25)])
+    return chars
 
     def insertinfo(self):  # insert info and click on the confrim check box
         etgar = "https://etgar22.co.il/?utm_source=test&utm_medium=test&utm_campaign=test"
         ch = "https://challenge22.com/?utm_source=test&utm_medium=test&utm_campaign=test"
         ch_es = "https://challenge22.com/es/?utm_source=test&utm_medium=test&utm_campaign=test"
         fname = "test+bot"
-        lname = webFunc.random_char(3) + str(randint(1, 999))
+        lname = webFunc.random_char(5) + str(randint(1, 999))
         email = fname + lname + "@animals-now.org"
         phone = "050" + str(randint(1000000, 9999999))
         self.info = [fname, lname, email, phone]
