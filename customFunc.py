@@ -5,7 +5,6 @@ import gspread
 from datetime import datetime
 import random
 from random import randint
-import string
 from time import sleep
 
 import emailfunc
