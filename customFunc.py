@@ -191,7 +191,7 @@ class webFunc:
 
 
     def petitions_age(self):
-        age_box = self.driver.find_element_by_xpath('//select[@placeholder="שנת לידה"]')
+        age_box = self.driver.find_element_by_xpath('//select[@placeholder="שנת לידה *"]')
         age_box.click()
         select_age = self.driver.find_element_by_xpath('//option[@value="{}"]'.format(randint(1930, 2004)))
         select_age.click()
