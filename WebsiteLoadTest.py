@@ -38,8 +38,8 @@ header_list = [
  {'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, '
                 'like Gecko) Chrome/33.0.1750.517 Safari/537.36'}]
 
+header = random.choice(header_list)
 for site in site_list:
-    header = random.choice(header_list)
     start = time.time()
     try:
         request = requests.get(site, headers=header)
