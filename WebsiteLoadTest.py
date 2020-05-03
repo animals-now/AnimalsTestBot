@@ -1,5 +1,5 @@
 import customFunc
-#import requests
+import requests
 from requests.exceptions import ConnectionError
 import random
 import time
