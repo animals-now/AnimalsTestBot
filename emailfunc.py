@@ -57,11 +57,11 @@ def petition_emails(service, user_id, search_string):  # tell how many emails we
         search_id = service.users().messages().list(userId=user_id, q=search_string).execute()
         number_results = int(search_id['resultSizeEstimate'])
 
-        if number_results == 2:
-            return "Succeed! Thanks email and Salesforce email received"
+        if number_results == 1:
+            return "Succeed! Salesforce email received"
 
         else:
-            return "Failed - Found " + str(number_results) + " emails instead of 2"
+            return "Failed - Found " + str(number_results) + " emails instead of 1"
 
     except (errors.HttpError, errors):
         return 'Damn!..., an error has occured... %s' % errors
