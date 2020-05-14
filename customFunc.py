@@ -212,6 +212,6 @@ class webFunc:
             row_status = [str(datetime.today())[0:16], petitions_list[petitions_index], email_address, status]
             report_sheet.insert_row(row_status, 2)
             petitions_index += 1
-            if status != "Succeed! Thanks email and Salesforce email received":
+            if status != "Succeed! Salesforce email received":
                 emailfunc.signup_failed_email(service, row_status)
 
