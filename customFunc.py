@@ -55,9 +55,9 @@ class webFunc:
         if self.site == etgar:
             placeholder = ["שם פרטי", "שם משפחה", "אימייל", "טלפון"]
         elif self.site == ch:
-            placeholder = ["First Name", "Last Name", "Email", " Phone (optional)"]
+            placeholder = ["First Name", "Last Name", "Email"]
         elif self.site == ch_es:
-            placeholder = ["Nombre", "Apellido", "Email", "Teléfono (opcional)"]
+            placeholder = ["Nombre", "Apellido", "Email"]
         else:  # for petitions
             placeholder = ["שם פרטי", "שם משפחה", "אימייל", "מספר טלפון"]
 
