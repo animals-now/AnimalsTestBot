@@ -56,8 +56,12 @@ class webFunc:
             placeholder = ["שם פרטי", "שם משפחה", "אימייל", "טלפון"]
         elif self.site == ch:
             placeholder = ["First Name", "Last Name", "Email"]
+            send_button = self.driver.find_element_by_id('ap-cookiesConfirm__accept')
+            send_button.click()
         elif self.site == ch_es:
             placeholder = ["Nombre", "Apellido", "Email"]
+            send_button = self.driver.find_element_by_id('ap-cookiesConfirm__accept')
+            send_button.click()
         else:  # for petitions
             placeholder = ["שם פרטי", "שם משפחה", "אימייל", "מספר טלפון"]
 
@@ -65,6 +69,7 @@ class webFunc:
             box = self.driver.find_element_by_xpath('//input[@placeholder="{}"]'.format(i))
             box.send_keys(self.info[info_index])
             info_index += 1
+          
 
 
     def collectinfo(self):
