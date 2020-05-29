@@ -1,6 +1,6 @@
 import customFunc
 
-email = input("Email to check: ")  
+email = test+boteykrm883@animals-now.org 
 info = ["name", "lastn", email, "phone"]
 client = customFunc.auth.get_service_sheet()  # open google sheet API client
 report_sheet = client.open("Report").sheet1  # open report sheet, will insert success or failure
