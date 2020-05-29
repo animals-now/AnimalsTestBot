@@ -7,10 +7,10 @@ report_sheet = client.open("Report").sheet1  # open report sheet, will insert su
 sheet = 'הרשמה לאתגר 22 - SPANISH'
 sign_up_sheet = client.open(sheet).sheet1  # open sign up form sheet
 time_now = str(customFunc.datetime.today())[0:16]
-row_failed = [time_now, sheet, info[2], "Sign up failed: not found in the sheet"]
-row_succeed_all = [time_now, sheet, info[2], "Sign up succeed and removed from google sheet"]
-row_remove_more = [time_now, sheet, info[2], "Sign up succeed but remove more that one row"]
-row_not_remove = [time_now, sheet, info[2], "Sign up succeed but found test email again"]
+row_failed = [time_now, sheet, info[2], "Sign up failed: not found in the sheet (FailChecker)"]
+row_succeed_all = [time_now, sheet, info[2], "Sign up succeed and removed from google sheet (FailChecker)"]
+row_remove_more = [time_now, sheet, info[2], "Sign up succeed but remove more that one row (FailChecker)"]
+row_not_remove = [time_now, sheet, info[2], "Sign up succeed but found test email again (FailChecker)"]
 
 try:
     sign_up_sheet.find(info[2])  # search if the test email found in sign up form sheet
