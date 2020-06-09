@@ -40,6 +40,7 @@ header_list = [
 
 header = random.choice(header_list)
 for site in site_list:
+    # First test, send get request if get error or the srv take more then 15 second to response - Fail
     start = time.time()
     try:
         request = requests.get(site, headers=header)
@@ -56,4 +57,14 @@ for site in site_list:
         error = 'too much time to load - : ' + str(end - start)[0:4] + ' seconds'
         customFunc.emailfunc.web_error_email(service, error, site, str(header))
     customFunc.sleep(10)
+    
+    page = request.text # get the page source code
 
+    # Second test search for familiar words in the page, if not found - Fail.
+    if 'animals' not in page:
+        customFunc.emailfunc.web_error_email(service, 'The word "animals" does not found in the page source', site, str(header))
+
+    # Third test search for character that always appear in gibberish text, if found - Fail
+    if '×' in page:
+        customFunc.emailfunc.web_error_email(service, 'Gibberish character("×") found in the page', site, str(header))
+    
