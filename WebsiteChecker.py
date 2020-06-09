@@ -50,7 +50,7 @@ for site in site_list:
             customFunc.emailfunc.web_error_email(service, str(request.status_code),site ,str(header))
 
     except ConnectionError:
-        customFunc.emailfunc.web_error_email(service, 'Web site does not exist', site, str(header))
+        customFunc.emailfunc.web_error_email(service, 'get request sent but the website does not respond', site, str(header))
     end = time.time()
 
     if end - start > 15:
