@@ -160,6 +160,7 @@ class webFunc:
         row_succeed_all = [time_now, self.sheet, self.info[2], "Sign up succeed and removed from google sheet"]
         row_remove_more = [time_now, self.sheet, self.info[2], "Sign up succeed but remove more that one row"]
         row_not_remove = [time_now, self.sheet, self.info[2], "Sign up succeed but found test email"]
+        sleep(300)
         try:
             sign_up_sheet.find(self.info[2])  # search if the test email found in sign up form sheet
             rows_before_delete = len(sign_up_sheet.col_values(1))
