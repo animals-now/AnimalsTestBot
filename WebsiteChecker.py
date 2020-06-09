@@ -58,7 +58,7 @@ for site in site_list:
         customFunc.emailfunc.web_error_email(service, error, site, str(header))
     customFunc.sleep(10)
     
-    page = request.text # get the page source code
+    page = request.text  # get the page source code
 
     # Second test search for familiar words in the page, if not found - Fail.
     if 'animals' not in page:
