@@ -11,7 +11,7 @@ anonymous = "https://anonymous.org.il/?utm_source=test&utm_medium=test&utm_campa
 veg = 'https://veg.co.il/?utm_source=test&utm_medium=test&utm_campaign=test'
 live_act = 'https://liveact.org/?utm_source=test&utm_medium=test&utm_campaign=test'
 
-site_list = [etgar, ch, animals, anonymous, veg, live_act]
+site_list = [etgar] #, ch, animals, anonymous, veg, live_act]
 service = customFunc.auth.get_service_gmail()
 
 header_list = [
@@ -65,6 +65,6 @@ for site in site_list:
         customFunc.emailfunc.web_error_email(service, 'The word "animals" does not found in the page source', site, str(header))
 
     # Third test search for character that always appear in gibberish text, if found - Fail
-    if '×' in page:
+    if '×' in page or 'animals' in page:
         customFunc.emailfunc.web_error_email(service, 'Gibberish character("×") found in the page', site, str(header))
     
