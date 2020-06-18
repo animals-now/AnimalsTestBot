@@ -49,7 +49,7 @@ class webFunc:
         fname = "test+bot"
         lname = webFunc.random_char(5) + str(randint(1, 999))
         email = fname + lname + "@animals-now.org"
-        phone = "050" + str(randint(1000000, 9999999))
+        phone = "052" + str(randint(1000000, 9999999))
         self.info = [fname, lname, email, phone]
         info_index = 0
         if self.site == etgar:
