@@ -86,7 +86,7 @@ class webFunc:
     def teen(self):
         teen_checkbox = self.driver.find_element_by_xpath('//label[@id="tfa_90-L"]')
         teen_checkbox.click()
-        sleep(1)
+        sleep(6)
         self.send()
         age_box = self.driver.find_element_by_xpath('//input[@placeholder="מה הגיל שלך?"]')
         age_box.send_keys(str(randint(14, 17)))
