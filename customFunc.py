@@ -156,11 +156,13 @@ class webFunc:
 
         sign_up_sheet = client.open(self.sheet).sheet1  # open sign up form sheet
         time_now = str(datetime.today())[0:16]
-        row_failed = [time_now, self.sheet, self.info[2], "Sign up failed: not found in the sheet"]
+        row_failed = [time_now, self.sheet, self.info[2], "Sign up failed registration not found in the sheet"]
         row_succeed_all = [time_now, self.sheet, self.info[2], "Sign up succeed and removed from google sheet"]
         row_remove_more = [time_now, self.sheet, self.info[2], "Sign up succeed but remove more that one row"]
         row_not_remove = [time_now, self.sheet, self.info[2], "Sign up succeed but the bot failed to remove the test email from the sheet"]
-        sleep(300)
+        if self.sheet != "אתגר 22 - טלפניות (Responses)": # the bot check this sheet after the regular sheet checked so there is no point
+            # to wait again
+            sleep(300)
         try:
             sign_up_sheet.find(self.info[2])  # search if the test email found in sign up form sheet
             rows_before_delete = len(sign_up_sheet.col_values(1))
