@@ -4,12 +4,12 @@ from requests.exceptions import ConnectionError
 import random
 import time
 
-etgar = "https://etgar22.co.il/?utm_source=test&utm_medium=test&utm_campaign=test"
-ch = "https://challenge22.com/?utm_source=test&utm_medium=test&utm_campaign=test"
-animals = "https://animals-now.org/?utm_source=test&utm_medium=test&utm_campaign=test"
-anonymous = "https://anonymous.org.il/?utm_source=test&utm_medium=test&utm_campaign=test"
-veg = 'https://veg.co.il/?utm_source=test&utm_medium=test&utm_campaign=test'
-live_act = 'https://liveact.org/?utm_source=test&utm_medium=test&utm_campaign=test'
+etgar = "https://etgar22.co.il/"
+ch = "https://challenge22.com/"
+animals = "https://animals-now.org/"
+anonymous = "https://anonymous.org.il/"
+veg = 'https://veg.co.il/'
+live_act = 'https://liveact.org/'
 
 site_list = [etgar, ch, animals, anonymous, veg, live_act]
 service = customFunc.auth.get_service_gmail()
