@@ -9,7 +9,7 @@ ch = "https://challenge22.com/"
 animals = "https://animals-now.org/"
 anonymous = "https://anonymous.org.il/"
 veg = 'https://veg.co.il/'
-live_act = 'https://liveact.org/'
+live_act = 'https://liveact.org/?utm_source=test&utm_medium=test&utm_campaign=test'
 
 site_list = [etgar, ch, animals, anonymous, veg, live_act]
 service = customFunc.auth.get_service_gmail()
