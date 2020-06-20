@@ -40,7 +40,7 @@ header_list = [
 
 header = random.choice(header_list)
 for site in site_list:
-    # First test, send get request if get error or the srv take more then 15 second to response - Fail
+    # First test, send get request if get error or the srv take more then 30 second to response - Fail
     start = time.time()
     try:
         request = requests.get(site, headers=header)
@@ -53,7 +53,7 @@ for site in site_list:
         customFunc.emailfunc.web_error_email(service, 'get request sent but the website does not respond', site, str(header))
     end = time.time()
 
-    if end - start > 60:
+    if end - start > 30:
         error = 'too much time to load - : ' + str(end - start)[0:4] + ' seconds'
         customFunc.emailfunc.web_error_email(service, error, site, str(header))
     customFunc.sleep(10)
