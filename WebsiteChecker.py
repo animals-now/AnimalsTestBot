@@ -46,10 +46,10 @@ for site in site_list:
     try:
         request = requests.get(site, headers=header)
         if request.status_code == 200:
-            pass
+            customFunc.emailfunc.reset_error_counter('CodeError', service, site)
         else:
             customFunc.emailfunc.web_error_email('CodeError', service, str(request.status_code), site, str(header))
-
+        customFunc.emailfunc.reset_error_counter('ConnectionError', service, site)
     except ConnectionError:
                 customFunc.emailfunc.web_error_email('ConnectionError', service,
                                              'get request sent but the website does not respond', site, str(header))
@@ -58,6 +58,8 @@ for site in site_list:
     if end - start > 30:
         error = 'too much time to load - : ' + str(end - start)[0:4] + ' seconds'
         customFunc.emailfunc.web_error_email('LoadTimeError', service, error, site, str(header))
+    else:
+        customFunc.emailfunc.reset_error_counter('LoadTimeError', service, site)    
     customFunc.sleep(10)
     
     page = request.text  # get the page source code
@@ -66,8 +68,13 @@ for site in site_list:
     if 'animals' not in page:
          customFunc.emailfunc.web_error_email('FamiliarWordError', service,
                                              'The word "animals" does not found in the page source', site, str(header))
+    else:
+         customFunc.emailfunc.reset_error_counter('FamiliarWordError', service, site) 
     # Third test search for character that always appear in gibberish text, if found - Fail
     if '×' in page:
         customFunc.emailfunc.web_error_email('GibberishError', service,
                                              'Gibberish character("×") found in the page', site, str(header))
+    else:
+         customFunc.emailfunc.reset_error_counter('GibberishError', service, site) 
+     
    
