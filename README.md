@@ -5,7 +5,7 @@ Etgar22 and Challenge22 contain bots that sign up, check if the registration tra
 PetitionsTest contain bot that sign up to all petitions and check if the user info transfered to salesforce.
 for every sign up saleforce got from test+???@animals-now.org it send email to our test email, so thats how the bot know if the sign up transfered to salesfoce or not.
 
-WebsiteChecker send get request to our websites(see which websites in the websitecheker.py) if get error or the website doesn't respond for more than 15 second the test fail. also check if the websites contain any gibrrish char and if the websites contain words that must appear in any of our websites. if gibbrish char found in the website or if any of the words doesn't appear in the website the test fail. NOTE: the bot sill send only once in 30min email even if it fail more that once in 30min.
+WebsiteChecker send get request to our websites(see which websites in the websitecheker.py) if get error or the website doesn't respond for more than 15 second the test fail. also check if the websites contain any gibrrish char and if the websites contain words that must appear in any of our websites. if gibbrish char found in the website or if any of the words doesn't appear in the website the test fail. NOTE: the bot will send only one email in 30min even if it fail more than once in 30min.
 
 *For every failure email send to dev with data about the failure.
 
