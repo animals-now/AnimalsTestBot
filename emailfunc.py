@@ -71,7 +71,7 @@ def web_error_email_no_delay(service, error, site, header):
     message_text = "Error: " + error + ", Website: " + site + ", header: " + header
     sender = "me"
     subject = "WebSite Error"
-    to_list = ["maor@animals-now.org"] # , "dev@animals-now.org"]
+    to_list = ["maor@animals-now.org", "dev@animals-now.org"]
     user_id = "me"
 
     for to in to_list:
