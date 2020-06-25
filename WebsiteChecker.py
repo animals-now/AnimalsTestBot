@@ -11,7 +11,7 @@ anonymous = "https://anonymous.org.il/"
 veg = 'https://veg.co.il/'
 live_act = 'https://liveact.org/'
 
-site_list = [etgar, ch, animals, anonymous, veg, live_act]
+site_list = [etgar, ch] # , animals, anonymous, veg, live_act]
 service = customFunc.auth.get_service_gmail()
 
 header_list = [
@@ -47,24 +47,26 @@ for site in site_list:
         if request.status_code == 200:
             pass
         else:
-            customFunc.emailfunc.web_error_email(service, str(request.status_code),site ,str(header))
+            customFunc.emailfunc.web_error_email('CodeError', service, str(request.status_code), site, str(header))
 
     except ConnectionError:
-        customFunc.emailfunc.web_error_email(service, 'get request sent but the website does not respond', site, str(header))
+                customFunc.emailfunc.web_error_email('ConnectionError', service,
+                                             'get request sent but the website does not respond', site, str(header))
     end = time.time()
 
     if end - start > 30:
         error = 'too much time to load - : ' + str(end - start)[0:4] + ' seconds'
-        customFunc.emailfunc.web_error_email(service, error, site, str(header))
-    customFunc.sleep(10)
+        customFunc.emailfunc.web_error_email('LoadTimeError', service, error, site, str(header))
+    customFunc.sleep(3)
     
     page = request.text  # get the page source code
 
     # Second test search for familiar words in the page, if not found - Fail.
-    if 'animals' not in page:
-        customFunc.emailfunc.web_error_email(service, 'The word "animals" does not found in the page source', site, str(header))
-
+    if 'animalsgdgadsfg234234' not in page:
+         customFunc.emailfunc.web_error_email('FamiliarWordError', service,
+                                             'The word "animals" does not found in the page source', site, str(header))
     # Third test search for character that always appear in gibberish text, if found - Fail
     if '×' in page:
-        customFunc.emailfunc.web_error_email(service, 'Gibberish character("×") found in the page', site, str(header))
-    
+        customFunc.emailfunc.web_error_email('GibberishError', service,
+                                             'Gibberish character("×") found in the page', site, str(header))
+   
