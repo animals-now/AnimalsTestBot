@@ -11,7 +11,7 @@ anonymous = "https://anonymous.org.il/"
 veg = 'https://veg.co.il/'
 live_act = 'https://liveact.org/'
 
-site_list = [etgar, ch] # , animals, anonymous, veg, live_act]
+site_list = [etgar, ch, animals, anonymous, veg, live_act]
 service = customFunc.auth.get_service_gmail()
 
 header_list = [
@@ -57,7 +57,7 @@ for site in site_list:
     if end - start > 30:
         error = 'too much time to load - : ' + str(end - start)[0:4] + ' seconds'
         customFunc.emailfunc.web_error_email('LoadTimeError', service, error, site, str(header))
-    customFunc.sleep(3)
+    customFunc.sleep(10)
     
     page = request.text  # get the page source code
 
