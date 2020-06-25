@@ -103,3 +103,16 @@ def web_error_email(error_type, service, error, site, header):
             f.close()
     except: # if there is trouble with the json file, the email will sent every session
         web_error_email_no_delay(service, (str(error) + ". Also JSON file failed - no delay between emails(code problem)"), site, str(header))
+     
+def reset_error_counter(error_type, service, site):
+    try:
+        with open(json_path, 'r') as f:
+            data = json.load(f)
+        f.close()
+    if data[site][error_type] != 0:
+        data[site][error_type] = 0
+        with open(json_path, 'w+') as f:
+            f.write(json.dumps(data))
+        f.close()
+    except:
+        web_error_email_no_delay(service, ("fail to reset error counter: " + error_type), site, 'irelevant')   
