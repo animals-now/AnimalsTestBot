@@ -11,6 +11,4 @@ WebsiteChecker send get request to our websites(see which websites in the websit
 
 auth.py - contain function that create authorizations for google spreadsheets API and for gmail API
 
-token.pickle - gmail API authorization  # result of auth
-
-emailfunc.py - contain function to interact  with gmail API
+emailfunc.py - contain function to interact with gmail API
