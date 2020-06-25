@@ -84,20 +84,22 @@ def web_error_email_no_delay(service, error, site, header):
 # the counter indicate when the last failure email sent, counter = 5 mean that in was sent in the last session and counter = 0 mean that the last email sent before more than
 # 5 sessions
 json_path = '/home/maor_animals_now_org/pytest/error_status.json'
-def web_error_email(error_type, service, request_status_code, site, header):
-
-    with open(json_path, 'r') as f:
-        data = json.load(f)
-    f.close()
-
-    if data[site][error_type] == 0:
-        web_error_email_no_delay(service, str(request_status_code), site, str(header))
-        data[site][error_type] = 5
-        with open(json_path, 'w+') as f:
-            f.write(json.dumps(data))
+def web_error_email(error_type, service, error, site, header):
+    try:
+        with open(json_path, 'r') as f:
+            data = json.load(f)
         f.close()
-    else:
-        data[site][error_type] = data[site][error_type] - 1
-        with open(json_path, 'w+') as f:
-            f.write(json.dumps(data))
-        f.close()
+
+        if data[site][error_type] == 0:
+            web_error_email_no_delay(service, str(error), site, str(header))
+            data[site][error_type] = 5
+            with open(json_path, 'w+') as f:
+                f.write(json.dumps(data))
+            f.close()
+        else:
+            data[site][error_type] = data[site][error_type] - 1
+            with open(json_path, 'w+') as f:
+                f.write(json.dumps(data))
+            f.close()
+    except: # if there is trouble with the json file, the email will sent every session
+        web_error_email_no_delay(service, (str(error) + "Also JSON file failed - no delay between emails(code problem)"), site, str(header))
