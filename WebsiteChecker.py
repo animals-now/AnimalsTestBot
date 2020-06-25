@@ -62,7 +62,7 @@ for site in site_list:
     page = request.text  # get the page source code
 
     # Second test search for familiar words in the page, if not found - Fail.
-    if 'animalsgdgadsfg234234' not in page:
+    if 'animals' not in page:
          customFunc.emailfunc.web_error_email('FamiliarWordError', service,
                                              'The word "animals" does not found in the page source', site, str(header))
     # Third test search for character that always appear in gibberish text, if found - Fail
