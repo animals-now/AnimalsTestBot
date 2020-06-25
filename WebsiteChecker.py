@@ -60,7 +60,7 @@ for site in site_list:
         customFunc.emailfunc.web_error_email('LoadTimeError', service, error, site, str(header))
     else:
         customFunc.emailfunc.reset_error_counter('LoadTimeError', service, site)    
-    customFunc.sleep(10)
+    customFunc.sleep(5)
     
     page = request.text  # get the page source code
 
