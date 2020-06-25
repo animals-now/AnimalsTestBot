@@ -110,7 +110,7 @@ def reset_error_counter(error_type, service, site):
             data = json.load(f)
         f.close()
         if data[site][error_type] != 0:
-            data[site][error_type] = 0
+            data[site][error_type] = data[site][error_type] - 1
             with open(json_path, 'w+') as f:
                  f.write(json.dumps(data))
             f.close()
