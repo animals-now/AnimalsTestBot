@@ -102,4 +102,4 @@ def web_error_email(error_type, service, error, site, header):
                 f.write(json.dumps(data))
             f.close()
     except: # if there is trouble with the json file, the email will sent every session
-        web_error_email_no_delay(service, (str(error) + "Also JSON file failed - no delay between emails(code problem)"), site, str(header))
+        web_error_email_no_delay(service, (str(error) + ". Also JSON file failed - no delay between emails(code problem)"), site, str(header))
