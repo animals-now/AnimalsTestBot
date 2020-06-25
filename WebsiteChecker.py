@@ -3,7 +3,6 @@ import requests
 from requests.exceptions import ConnectionError
 import random
 import time
-import json
 
 etgar = "https://etgar22.co.il/"
 ch = "https://challenge22.com/"
