@@ -66,13 +66,37 @@ def petition_emails(service, user_id, search_string):  # tell how many emails we
     except (errors.HttpError, errors):
         return 'Damn!..., an error has occured... %s' % errors
     
-def web_error_email(service, error, site, header):
+def web_error_email_no_delay(service, error, site, header):
     message_text = "Error: " + error + ", Website: " + site + ", header: " + header
     sender = "me"
     subject = "WebSite Error"
-    to_list = ["maor@animals-now.org", "dev@animals-now.org"]
+    to_list = ["maor@animals-now.org"] # , "dev@animals-now.org"]
     user_id = "me"
 
     for to in to_list:
         message = create_message(sender, to, subject, message_text)
         send_message(service, user_id, message)
+ 
+
+# Check if email already sent in the last five sessions. if email already sent, email will not send again.
+# the code open json file, the json file contain site and dict of error for each site. the error dict contain error and counter(type=INT) like that: "SomeError": counter
+# the counter indicate when the last failure email sent, counter = 5 mean that in was sent in the last session and counter = 0 mean that the last email sent before more than
+# 5 sessions
+json_path = '/home/maor_animals_now_org/pytest/error_status.json'
+def web_error_email(error_type, service, request_status_code, site, header):
+
+    with open(json_path, 'r') as f:
+        data = json.load(f)
+    f.close()
+
+    if data[site][error_type] == 0:
+        web_error_email_no_delay(service, str(request_status_code), site, str(header))
+        data[site][error_type] = 5
+        with open(json_path, 'w+') as f:
+            f.write(json.dumps(data))
+        f.close()
+    else:
+        data[site][error_type] = data[site][error_type] - 1
+        with open(json_path, 'w+') as f:
+            f.write(json.dumps(data))
+        f.close()
