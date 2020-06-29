@@ -75,6 +75,4 @@ for site in site_list:
         customFunc.emailfunc.web_error_email('GibberishError', service,
                                              'Gibberish character("×") found in the page', site, str(header))
     else:
-         customFunc.emailfunc.reset_error_counter('GibberishError', service, site) 
-     
-   
+         customFunc.emailfunc.reset_error_counter('GibberishError', service, site)
