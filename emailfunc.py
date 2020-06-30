@@ -45,7 +45,7 @@ def signup_failed_email(service, row):
     message_text = "Sheet\Petition: " + row[1] + " Email: " + row[2] + " Reason: " + row[3]
     sender = "me"
     subject = "Sign Up Failed"
-    to_list = ["maor@animals-now.org", "dev@animals-now.org"]
+    to_list = ["dev@animals-now.org"]
     user_id = "me"
 
     for to in to_list:
