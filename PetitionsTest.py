@@ -24,6 +24,6 @@ for site in site_list:  # sign up to petitions in the site list, for each sign u
     session.driver.quit()
     customFunc.sleep(45)
 
-customFunc.sleep(240)
+customFunc.sleep(480)
 
 session.check_in_gmail(email_list, petitions_list)
