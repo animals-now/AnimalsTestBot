@@ -7,8 +7,9 @@ protection_act = "https://animals-now.org/issues/animal-protection-act/?utm_sour
 fish = "https://animals-now.org/investigations/fish/?utm_source=test&utm_medium=test&utm_campaign=test"
 zoglobek = "https://animals-now.org/issues/zoglobek-lawsuit/?utm_source=test&utm_medium=test&utm_campaign=test"
 fur = "https://animals-now.org/issues/fur/?utm_source=test&utm_medium=test&utm_campaign=test"
+stop_cages = "https://animals-now.org/issues/stop-cages/?utm_source=test&utm_medium=test&utm_campaign=test"
 
-site_list = [turkey, live_transports, cages, protection_act, fish, zoglobek, fur]
+site_list = [turkey, live_transports, cages, protection_act, fish, zoglobek, fur, stop_cages]
 
 email_list = []  # list with the email used to sign up
 petitions_list = []  # list with link to petition that the bot signed up
@@ -22,7 +23,7 @@ for site in site_list:  # sign up to petitions in the site list, for each sign u
     email_list.append(session.info[2])
     petitions_list.append(site)
     session.driver.quit()
-    customFunc.sleep(45)
+    customFunc.sleep(10)
 
 customFunc.sleep(480)
 
