@@ -194,11 +194,11 @@ class webFunc:
             emailfunc.signup_failed_email(service, row_failed)            
 
 
-    def petitions_age(self):
-        age_box = self.driver.find_element_by_xpath('//select[@placeholder="שנת לידה"]')
-        age_box.click()
-        select_age = self.driver.find_element_by_xpath('//option[@value="{}"]'.format(randint(1930, 2004)))
-        select_age.click()
+#     def petitions_age(self):
+#         age_box = self.driver.find_element_by_xpath('//select[@placeholder="שנת לידה"]')
+#         age_box.click()
+#         select_age = self.driver.find_element_by_xpath('//option[@value="{}"]'.format(randint(1930, 2004)))
+#         select_age.click()
 
     def petitions_send(self):  # press on continue
         send_button = self.driver.find_element_by_xpath('//button[@type="submit"]')
