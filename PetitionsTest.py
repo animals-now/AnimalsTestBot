@@ -17,7 +17,7 @@ for site in site_list:  # sign up to petitions in the site list, for each sign u
     session.url()
     customFunc.sleep(6)
     session.insertinfo()
-    session.petitions_age()
+#    session.petitions_age()
     session.petitions_send()
     email_list.append(session.info[2])
     petitions_list.append(site)
