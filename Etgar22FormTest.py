@@ -1,4 +1,4 @@
-import customFuncs
+import customFunc
 
 site = "https://etgar22.co.il/?utm_source=test&utm_medium=test&utm_campaign=test"
 sheet = "אתגר 22 מבוגרים - 2019 (Responses)"
