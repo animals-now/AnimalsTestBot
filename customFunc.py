@@ -60,7 +60,7 @@ class webFunc:
             placeholder = ["Nombre", "Apellido", "Email"]
         else:  # for petitions
         #    placeholder = [שם פרטי *", "שם משפחה *", "אימייל *", "מספר טלפון"]
-            placeholder = [שם פרטי *", "שם משפחה *", "מספר טלפון", "אימייל *"]
+            placeholder = ["שם פרטי *", "שם משפחה *", "מספר טלפון", "אימייל *"]
 
         for i in placeholder:
             box = self.driver.find_element_by_xpath('//input[@placeholder="{}"]'.format(i))
