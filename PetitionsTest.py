@@ -9,7 +9,7 @@ zoglobek = "https://animals-now.org/issues/zoglobek-lawsuit/?utm_source=test&utm
 fur = "https://animals-now.org/issues/fur/?utm_source=test&utm_medium=test&utm_campaign=test"
 stop_cages = "https://animals-now.org/issues/stop-cages/?utm_source=test&utm_medium=test&utm_campaign=test"
 
-site_list = [turkey, live_transports, cages, protection_act, fish, zoglobek, fur, stop_cages]
+site_list = [turkey, live_transports, cages, fish, zoglobek, fur, stop_cages] # protection_act elem not interact able for some reason
 
 email_list = []  # list with the email used to sign up
 petitions_list = []  # list with link to petition that the bot signed up
