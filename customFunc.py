@@ -62,14 +62,11 @@ class webFunc:
         #    placeholder = [שם פרטי *", "שם משפחה *", "אימייל *", "מספר טלפון"]
             placeholder = ["שם פרטי *", "שם משפחה *", "מספר טלפון", "אימייל *"]
             
-        try:
-            for i in placeholder:
-                box = self.driver.find_element_by_xpath('//input[@placeholder="{}"]'.format(i))
-                box.send_keys(self.info[info_index])
-                info_index += 1
-        except:
-            print("failed to enter value: " ,self.driver.current_url)
-          
+
+        for i in placeholder:
+            box = self.driver.find_element_by_xpath('//input[@placeholder="{}"]'.format(i))
+            box.send_keys(self.info[info_index])
+            info_index += 1
 
 
     def collectinfo(self):
