@@ -91,10 +91,9 @@ class webFunc:
             if any([plc in real_placeholder for plc in placeholder_dict[field]]):
                 try:
                     elem.send_keys(keys)
-                    print(f'Succeed to send keys to: {real_placeholder} (field placeholder)')
+                    print('Succeed to send keys to: '{}' (field placeholder)'.format(real_placeholder))
                 except:
-                    # if failed to send keys to the field, print it to the console
-                    print(f'Failed to send keys to: {real_placeholder} (field placeholder)')
+                    print(f'Failed to send keys to: '{}' (field placeholder)'.format(real_placeholder))
 
 
     def send(self):
