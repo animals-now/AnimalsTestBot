@@ -269,15 +269,15 @@ class webFunc:
         petitions_index = 0
         for email_address in email_list:
             num_emails_received = emailfunc.petition_emails(service, 'me', email_address)
-            if num_emails_received == 0:
+            if num_emails_received == 1:
                 status = "Succeed! Salesforce email received"
             else:
                 status = "Failed - Found " + str(num_emails_received) + " emails instead of 1"
             row_status = [str(datetime.today())[0:16], petitions_list[petitions_index], email_address, status]
             report_sheet.insert_row(row_status, 2)
-            petitions_index += 1
             if num_emails_received != 1:
                 emailfunc.signup_failed_email(service, row_status)
+            petitions_index += 1
 
     # def petitions_age(self):
     #     """
