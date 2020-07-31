@@ -9,22 +9,28 @@ zoglobek = "https://animals-now.org/issues/zoglobek-lawsuit/?utm_source=test&utm
 fur = "https://animals-now.org/issues/fur/?utm_source=test&utm_medium=test&utm_campaign=test"
 stop_cages = "https://animals-now.org/issues/stop-cages/?utm_source=test&utm_medium=test&utm_campaign=test"
 
-site_list = [turkey, cages, fish, zoglobek, fur, stop_cages] # protection_act elem not interact able for some reason
-
-email_list = []  # list with the email used to sign up
+site_list = [protection_act, live_transports, turkey, cages, fish, zoglobek, fur, stop_cages]
+email_list = []  # list with the email used to signed up
 petitions_list = []  # list with link to petition that the bot signed up
 for site in site_list:  # sign up to petitions in the site list, for each sign up generate new info
     session = customFunc.webFunc(site)
+    session.start_driver()
     session.url()
     customFunc.sleep(6)
-    session.insertinfo()
-#    session.petitions_age()
+    print('petition url: "{}"'.format(site))
+    session.add_my_name_to_petition()  # DELETE WHEN A/B THE IS DONE
+    customFunc.sleep(3)
+    session.insert_info_to_field('FirstName', session.first_name)
+    session.insert_info_to_field('LastName', session.last_name)
+    session.insert_info_to_field('Email', session.email)
+    session.insert_info_to_field('Phone', session.phone)
     session.petitions_send()
-    email_list.append(session.info[2])
+    email_list.append(session.email)
     petitions_list.append(site)
     session.driver.quit()
-    customFunc.sleep(10)
+    customFunc.sleep(3)
 
 customFunc.sleep(480)
 
+session = customFunc.webFunc('None')
 session.check_in_gmail(email_list, petitions_list)
