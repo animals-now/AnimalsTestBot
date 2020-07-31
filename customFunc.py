@@ -194,6 +194,7 @@ class webFunc:
         If the registration doesn't arrive to the google sheet, failure email will be sent to dev.
         Also there is a method that check if there only one row deleted from the google sheet, in case more or
         less then one row deleted the test failed and email sent to dev.
+        Also write registration detail in google sheet named 'Report'(test@animals-now.org is the owner of this sheet)
         """
         client = auth.get_service_sheet()  # open google sheet API client
         service = auth.get_service_gmail()  # open gmail Api
