@@ -74,11 +74,14 @@ class webFunc:
 
         placeholder_dict = {'FirstName': ['פרטי', 'First', 'first', 'Nombre', 'nombre'],
                             'LastName': ['משפחה', 'Last', 'last', 'Apellido', 'apellido'],
-                            'Email': ['אימייל', 'מייל', 'דוא"ל', 'דואר אלקטרוני', "דוא'ל", 'Email', 'email'],
-                            'Phone': ['טלפון', 'נייד', 'Phone', 'phone', 'Mobile', 'mobile'],
-                            'Age': ['גיל', 'Age', 'age'],
-                            'Birthday': ['שנת לידה', 'Birthday', 'birthday'],
-                            'FullName': ['שם מלא', 'full name'],
+                            'Email': ['אימייל', 'מייל', 'דוא"ל', 'דואר אלקטרוני', "דוא'ל", 'Email', 'email',
+                                      'Correo electrónico', 'correo electrónico'],
+                            'Phone': ['טלפון', 'נייד', 'Phone', 'phone', 'Mobile', 'mobile', 'Teléfono', 'teléfono',
+                                      'Móvil', 'móvil'],
+                            'Age': ['גיל', 'Age', 'age', 'Años', 'años'],
+                            'Birthday': ['שנת לידה', 'Birthday', 'birthday', 'Cumpleaños', 'cumpleaños'],
+                            'FullName': ['שם מלא', 'שם', 'Full name', 'full name', 'Name', 'name',
+                                         'Nombre completo', 'nombre completo', 'Nombre', 'nombre'],
                             }
 
         # Find all elements with input tag (in the html <input>....</input>)
