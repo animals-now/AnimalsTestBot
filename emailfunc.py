@@ -42,6 +42,12 @@ def send_message(service, user_id, message):
 
 
 def signup_failed_email(service, row):
+    """
+    Use to send email about failure to sign up for petition and challenges
+    Accept:
+    service - gmail api auth
+    row - list that contain information about the failure
+    """
     message_text = "Sheet\Petition: " + row[1] + " Email: " + row[2] + " Reason: " + row[3]
     sender = "me"
     subject = "Sign Up Failed"
@@ -53,21 +59,31 @@ def signup_failed_email(service, row):
         send_message(service, user_id, message)
 
 
-def petition_emails(service, user_id, search_string):  # tell how many emails we found for search in gmail
+def petition_emails(service, user_id, search_string):
+    """
+    Search in user_id's email for string
+    Accept:
+    service - gmail api auth
+    user_id - user's email to search in it
+    search_string - string to search
+
+    Returns:
+    number_results - number of email found in the end of the search
+    """
     try:
         search_id = service.users().messages().list(userId=user_id, q=search_string).execute()
         number_results = int(search_id['resultSizeEstimate'])
 
-        if number_results == 1:
-            return "Succeed! Salesforce email received"
-
-        else:
-            return "Failed - Found " + str(number_results) + " emails instead of 1"
+        return number_results
 
     except (errors.HttpError, errors):
         return 'Damn!..., an error has occured... %s' % errors
-    
+
+
 def web_error_email_no_delay(service, error, site, header):
+    """
+    Sent failure email when website test fail.
+    """
     message_text = "Error: " + error + ", Website: " + site + ", header: " + header
     sender = "me"
     subject = "WebSite Error"
@@ -77,14 +93,20 @@ def web_error_email_no_delay(service, error, site, header):
     for to in to_list:
         message = create_message(sender, to, subject, message_text)
         send_message(service, user_id, message)
- 
 
-# Check if email already sent in the last five sessions. if email already sent, email will not send again.
-# the code open json file, the json file contain site and dict of error for each site. the error dict contain error and counter(type=INT) like that: "SomeError": counter
-# the counter indicate when the last failure email sent, counter = 5 mean that in was sent in the last session and counter = 0 mean that the last email sent before more than
-# 5 sessions
+
 json_path = '/home/maor_animals_now_org/pytest/error_status.json'
 def web_error_email(error_type, service, error, site, header):
+    """
+    Check if email already sent in the last five sessions. if email already sent,
+    email will not send again.
+    the code open json file, the json file contain sites and dict of error for each site.
+    the error dict contain error and counter(type=INT) like that: "SomeError": counter
+    the counter indicate when the last failure email sent. counter = 5 mean failure email was sent
+    in the last session, counter = 0 mean the last failure email sent before more than
+    5 sessions
+    """
+
     try:
         with open(json_path, 'r') as f:
             data = json.load(f)
@@ -101,10 +123,16 @@ def web_error_email(error_type, service, error, site, header):
             with open(json_path, 'w+') as f:
                 f.write(json.dumps(data))
             f.close()
-    except: # if there is trouble with the json file, the email will sent every session
-        web_error_email_no_delay(service, (str(error) + ". Also JSON file failed - no delay between emails(code problem)"), site, str(header))
-     
+    except:  # if there is trouble with the json file, the email will sent every session
+        web_error_email_no_delay(service,
+                                 (str(error) + ". Also JSON file failed - no delay between emails(code problem)")
+                                 , site, str(header))
+
+
 def reset_error_counter(error_type, service, site):
+    """
+    Reset the json file error counter when test succeed, each time subtract one from the counter.
+    """
     try:
         with open(json_path, 'r') as f:
             data = json.load(f)
@@ -112,7 +140,7 @@ def reset_error_counter(error_type, service, site):
         if data[site][error_type] != 0:
             data[site][error_type] = data[site][error_type] - 1
             with open(json_path, 'w+') as f:
-                 f.write(json.dumps(data))
+                f.write(json.dumps(data))
             f.close()
     except:
-        web_error_email_no_delay(service, ("fail to reset error counter: " + error_type), site, 'irelevant')   
+        web_error_email_no_delay(service, ("fail to reset error counter: " + error_type), site, 'irrelevant')
