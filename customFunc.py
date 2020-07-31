@@ -128,64 +128,7 @@ class webFunc:
         """
         teen_checkbox = self.driver.find_element_by_xpath('//label[@id="tfa_90-L"]')
         teen_checkbox.click()
-
-
-    def healthissue(self):
-        """
-        Sign ups to challenges's websites with random health.
-        OLD FUNCTION CHECK IT BEFORE USING!!!
-        """
-        etgar = "https://etgar22.co.il/?utm_source=test&utm_medium=test&utm_campaign=test"
-        ch = "https://challenge22.com/?utm_source=test&utm_medium=test&utm_campaign=test"
-        ch_es = "https://challenge22.com/es/?utm_source=test&utm_medium=test&utm_campaign=test"
-        if self.site == etgar:
-            general_issues_checkbox = self.driver.find_element_by_xpath('//label[@id="tfa_164-L"]')
-            general_issues_checkbox.click()
-            facebook_placeholder = "שם מלא ושם בפייסבוק"
-        elif self.site == ch:
-            general_issues_checkbox = self.driver.find_element_by_xpath('//label[@id="tfa_91-L"]')
-            general_issues_checkbox.click()
-            facebook_placeholder = "Full Name & Facebook Name"
-        elif self.site == ch_es:
-            general_issues_checkbox = self.driver.find_element_by_xpath('//label[@id="tfa_91-L"]')
-            general_issues_checkbox.click()
-            facebook_placeholder = "Nombre completo y nombre en Facebook"
-
-        self.send()
-        health_issues_id = ["tfa_96-L", "tfa_97-L", "tfa_98-L", "tfa_101-L", "tfa_102-L"]
-        random_issue = random.choice(health_issues_id)
-        specific_issues_checkbox = self.driver.find_element_by_xpath(
-            '//label[@class="label postField"][@id="{}"]'.format(random_issue))
-        specific_issues_checkbox.click()
-        sleep(1)
-
-        if random_issue == "tfa_97-L":  # "עברת ניתוח בריאטרי"
-            time_pass_id = ["tfa_114-L", "tfa_113-L", "tfa_114-L"]
-            random_time_pass = random.choice(time_pass_id)
-            time_pass_checkbox = self.driver.find_element_by_xpath(
-                '//label[@id="{}"]'.format(random_time_pass))
-            time_pass_checkbox.click()
-            if random_time_pass == "tfa_113-L":  # "מעל שנה (ללא סיבוכים מיוחדים)"
-                pass
-            else:  # "עד שנה, מעל שנה (עם סיבוכים מיוחדים)"
-                facebook_name_box = self.driver.find_elements_by_xpath(
-                    '//input[@placeholder = "{}"]'.format(facebook_placeholder))
-                for box in facebook_name_box:
-                    try:
-                        box.send_keys("test+bot" + "bodek")
-                    except:
-                        pass
-        else:  # "כל שאר המחלות"
-            try:
-                facebook_name_box = self.driver.find_elements_by_xpath(
-                    '//input[@placeholder = "{}"]'.format(facebook_placeholder))
-                for box in facebook_name_box:
-                    try:
-                        box.send_keys("test+bot" + "bodek")
-                    except:
-                        pass
-            except:
-                pass
+        
 
     def check_in_sheets(self, sheet):
         """
@@ -279,15 +222,7 @@ class webFunc:
             if num_emails_received != 1:
                 emailfunc.signup_failed_email(service, row_status)
             petitions_index += 1
-
-    # def petitions_age(self):
-    #     """
-    #     Choose random birthday from the scroll in animals-now.org's petitions
-    #     """
-    #     age_box = self.driver.find_element_by_xpath('//select[@placeholder="שנת לידה"]')
-    #     age_box.click()
-    #     select_age = self.driver.find_element_by_xpath('//option[@value="{}"]'.format(randint(1930, 2004)))
-    #     select_age.click()
+            
 
     def add_my_name_to_petition(self):
         """
@@ -300,3 +235,70 @@ class webFunc:
             button.click()
         except:
             print('Add my name to petition button not found, this button appear sometimes because its A/B test')
+         
+    
+#     def healthissue(self):
+#         """
+#         Sign ups to challenges's websites with random health.
+#         OLD FUNCTION CHECK IT BEFORE USING!!!
+#         """
+#         etgar = "https://etgar22.co.il/?utm_source=test&utm_medium=test&utm_campaign=test"
+#         ch = "https://challenge22.com/?utm_source=test&utm_medium=test&utm_campaign=test"
+#         ch_es = "https://challenge22.com/es/?utm_source=test&utm_medium=test&utm_campaign=test"
+#         if self.site == etgar:
+#             general_issues_checkbox = self.driver.find_element_by_xpath('//label[@id="tfa_164-L"]')
+#             general_issues_checkbox.click()
+#             facebook_placeholder = "שם מלא ושם בפייסבוק"
+#         elif self.site == ch:
+#             general_issues_checkbox = self.driver.find_element_by_xpath('//label[@id="tfa_91-L"]')
+#             general_issues_checkbox.click()
+#             facebook_placeholder = "Full Name & Facebook Name"
+#         elif self.site == ch_es:
+#             general_issues_checkbox = self.driver.find_element_by_xpath('//label[@id="tfa_91-L"]')
+#             general_issues_checkbox.click()
+#             facebook_placeholder = "Nombre completo y nombre en Facebook"
+
+#         self.send()
+#         health_issues_id = ["tfa_96-L", "tfa_97-L", "tfa_98-L", "tfa_101-L", "tfa_102-L"]
+#         random_issue = random.choice(health_issues_id)
+#         specific_issues_checkbox = self.driver.find_element_by_xpath(
+#             '//label[@class="label postField"][@id="{}"]'.format(random_issue))
+#         specific_issues_checkbox.click()
+#         sleep(1)
+
+#         if random_issue == "tfa_97-L":  # "עברת ניתוח בריאטרי"
+#             time_pass_id = ["tfa_114-L", "tfa_113-L", "tfa_114-L"]
+#             random_time_pass = random.choice(time_pass_id)
+#             time_pass_checkbox = self.driver.find_element_by_xpath(
+#                 '//label[@id="{}"]'.format(random_time_pass))
+#             time_pass_checkbox.click()
+#             if random_time_pass == "tfa_113-L":  # "מעל שנה (ללא סיבוכים מיוחדים)"
+#                 pass
+#             else:  # "עד שנה, מעל שנה (עם סיבוכים מיוחדים)"
+#                 facebook_name_box = self.driver.find_elements_by_xpath(
+#                     '//input[@placeholder = "{}"]'.format(facebook_placeholder))
+#                 for box in facebook_name_box:
+#                     try:
+#                         box.send_keys("test+bot" + "bodek")
+#                     except:
+#                         pass
+#         else:  # "כל שאר המחלות"
+#             try:
+#                 facebook_name_box = self.driver.find_elements_by_xpath(
+#                     '//input[@placeholder = "{}"]'.format(facebook_placeholder))
+#                 for box in facebook_name_box:
+#                     try:
+#                         box.send_keys("test+bot" + "bodek")
+#                     except:
+#                         pass
+#             except:
+#                 pass
+
+#     def petitions_age(self):
+#         """
+#         Choose random birthday from the scroll in animals-now.org's petitions
+#         """
+#         age_box = self.driver.find_element_by_xpath('//select[@placeholder="שנת לידה"]')
+#         age_box.click()
+#         select_age = self.driver.find_element_by_xpath('//option[@value="{}"]'.format(randint(1930, 2004)))
+#         select_age.click()            
