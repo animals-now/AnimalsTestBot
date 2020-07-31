@@ -12,7 +12,7 @@ anonymous = "https://anonymous.org.il/"
 veg = 'https://veg.co.il/'
 live_act = 'https://liveact.org/'
 
-site_list = [etgar, ch, animals, anonymous, veg, live_act, "https://www.mao321rtest123.com/"]
+site_list = [etgar, ch, animals, anonymous, veg, live_act]
 service = customFunc.auth.get_service_gmail()
 
 header_list = [
