@@ -93,7 +93,7 @@ class webFunc:
                     elem.send_keys(keys)
                     print('Succeed to send keys to: "{}" (field placeholder)'.format(real_placeholder))
                 except:
-                    print(f'Failed to send keys to: "{}" (field placeholder)'.format(real_placeholder))
+                    print('Failed to send keys to: "{}" (field placeholder)'.format(real_placeholder))
 
 
     def send(self):
