@@ -9,7 +9,7 @@ zoglobek = "https://animals-now.org/issues/zoglobek-lawsuit/?utm_source=test&utm
 fur = "https://animals-now.org/issues/fur/?utm_source=test&utm_medium=test&utm_campaign=test"
 stop_cages = "https://animals-now.org/issues/stop-cages/?utm_source=test&utm_medium=test&utm_campaign=test"
 
-site_list = [protection_act, live_transports, turkey, cages, fish, zoglobek, fur, stop_cages]
+site_list = [turkey, cages, fish, zoglobek, fur, stop_cages] # protection_act, live_transports,
 email_list = []  # list with the email used to signed up
 petitions_list = []  # list with link to petition that the bot signed up
 for site in site_list:  # sign up to petitions in the site list, for each sign up generate new info
