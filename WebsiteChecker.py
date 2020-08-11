@@ -5,6 +5,7 @@ import random
 import time
 
 # If you add website, also add it in the error_status.json that located in the server
+fish = "https://fish.org.il/"
 etgar = "https://etgar22.co.il/"
 ch = "https://challenge22.com/"
 animals = "https://animals-now.org/"
@@ -12,7 +13,7 @@ anonymous = "https://anonymous.org.il/"
 veg = 'https://veg.co.il/'
 live_act = 'https://liveact.org/'
 
-site_list = [etgar, ch, animals, anonymous, veg, live_act]
+site_list = [etgar, ch, animals, anonymous, veg, live_act, fish]
 service = customFunc.auth.get_service_gmail()
 
 header_list = [
