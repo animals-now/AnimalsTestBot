@@ -53,9 +53,8 @@ for site in site_list:
             continue
         customFunc.emailfunc.reset_error_counter('ConnectionError', service, site)
     except ConnectionError:
-                customFunc.emailfunc.web_error_email('ConnectionError', service,
-                                             'get request sent but the website does not respond', site, str(header))
-            continue
+                customFunc.emailfunc.web_error_email('ConnectionError', service, 'get request sent but the website does not respond', site, str(header))
+      continue
     end = time.time()
 
     if end - start > 30:
