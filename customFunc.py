@@ -150,11 +150,11 @@ class webFunc:
         row_not_remove_msg = "Sign up succeed but the bot failed to remove the test email from the google sheet"
         sign_up_sheet = client.open(self.sheet).sheet1  # open sign up form sheet
         time_now = str(datetime.today())[0:16]
-        row_failed = [time_now, self.sheet, self.email, row_failed_msg]
-        row_succeed_all = [time_now, self.sheet, self.email, row_success_all_msg]
-        row_remove_more = [time_now, self.sheet, self.email, row_remove_more_msg]
-        row_not_remove = [time_now, self.sheet, self.email, ]
-
+        row_failed = [time_now, self.sheet, self.site, self.email, row_failed_msg]
+        row_succeed_all = [time_now, self.sheet, self.site, self.email, row_success_all_msg]
+        row_remove_more = [time_now, self.sheet, self.site, self.email, row_remove_more_msg]
+        row_not_remove = [time_now, self.sheet, self.site, self.email, row_not_remove_msg]
+        
         try:
             sign_up_sheet.find(self.email)  # search if the test email found in sign up form sheet
             rows_before_delete = len(sign_up_sheet.col_values(1))
@@ -217,7 +217,7 @@ class webFunc:
                 status = "Succeed! Salesforce email received"
             else:
                 status = "Failed - Found " + str(num_emails_received) + " emails instead of 1"
-            row_status = [str(datetime.today())[0:16], petitions_list[petitions_index], email_address, status]
+            row_status = [str(datetime.today())[0:16], "Petition", petitions_list[petitions_index], email_address, status]
             report_sheet.insert_row(row_status, 2)
             if num_emails_received != 1:
                 emailfunc.signup_failed_email(service, row_status)
