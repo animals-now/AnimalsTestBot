@@ -114,7 +114,7 @@ def web_error_email(error_type, service, error, site, header):
 
         if data[site][error_type] == 0:
             web_error_email_no_delay(service, str(error), site, str(header))
-            data[site][error_type] = 1
+            data[site][error_type] = 5
             with open(json_path, 'w+') as f:
                 f.write(json.dumps(data))
             f.close()
