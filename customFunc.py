@@ -20,7 +20,7 @@ class webFunc:
         self.first_name = "test+bot"
         self.last_name = webFunc.random_char(5) + str(randint(1, 999))
         self.email = self.first_name + self.last_name + "@animals-now.org"
-        self.phone = "052" + str(randint(1000000, 9999999))
+        self.phone = "067" + str(randint(1000000, 9999999))
         self.info = [self.first_name, self.last_name, self.email, self.phone]
 
     def start_driver(self):
