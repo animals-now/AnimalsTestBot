@@ -48,7 +48,7 @@ def signup_failed_email(service, row):
     service - gmail api auth
     row - list that contain information about the failure
     """
-    message_text = "Sheet\Petition: " + row[1] + " Email: " + row[2] + " Reason: " + row[3]
+    message_text = "Sheet\Petition: " + row[1] + "Link: " + row[2] + " Email: " + row[3] + " Reason: " + row[4]
     sender = "me"
     subject = "Sign Up Failed"
     to_list = ["dev@animals-now.org"]
