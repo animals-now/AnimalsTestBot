@@ -74,8 +74,8 @@ test = 1
 production = 2
 
 # operation_mode = local_test
-operation_mode = test
-# operation_mode = production
+# operation_mode = test
+operation_mode = production
 
 
 #test_mode = True
