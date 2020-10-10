@@ -105,7 +105,7 @@ elif operation_mode == production:
     # etgar22_url = "https://etgar22.co.il/"
     do_mirror_url = "https://monitor.etgar22.co.il/mirror_etgar22.php"
     etgar22_original_ip_url = 'https://80.179.230.68/monitor.txt'
-    seconds_to_wait_before_start_mirror = 300
+    seconds_to_wait_before_start_mirror = 120
 
 state_path = '/home/oded_animals_now_org/pytest/etgar22_mirror_manager_state.json'
 mirror_etgar22_code = read_file('/home/oded_animals_now_org/pytest/mirror_etgar22_code.txt')
