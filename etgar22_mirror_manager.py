@@ -82,7 +82,8 @@ operation_mode = production
 #localhost_most = True
 
 
-send_notification_emails_to = "oded@animals-now.org"
+# send_notification_emails_to = "oded@animals-now.org"
+send_notification_emails_to = "dev@animals-now.org"
 send_notification_emails_from = "test@animals-now.org"
 
 
