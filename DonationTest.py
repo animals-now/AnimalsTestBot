@@ -1,10 +1,10 @@
-import random
 import unittest
 
-from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
+
+import customFunc
 
 
 # TODO - do we want to check elements outside of the form? for instance, above the amount buttons
@@ -24,13 +24,12 @@ class Page:
 class DonationTest(unittest.TestCase):
 
     def setUp(self):
-        random_num = random.randint(1, 11)
-        if random_num <= 5:
-            print("Firefox")
-            self.driver = webdriver.Firefox()
-        else:
-            print("Chrome")
-            self.driver = webdriver.Chrome()
+        session = customFunc.webFunc('no-site')
+        session.start_driver()
+        self.driver = session.driver
+
+    def tearDown(self):
+        self.driver.quit()
 
     def test_donation_form(self):
         params = "?group=test&utm_source=test&utm_medium=test&utm_campaign=test"

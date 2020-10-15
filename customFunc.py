@@ -46,6 +46,9 @@ class webFunc:
         """
         Navigate to the site address that accepted upon creating instance.
         """
+        # TODO: this is not the right way to visit a URL. should be:
+        #       self.driver.get(self.site)
+        #       Note that this affects all scripts, so must run all tests when
         self.driver.execute_script("window.location = '{}'".format(self.site))
 
     @staticmethod
