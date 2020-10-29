@@ -64,15 +64,14 @@ class DonationTest(unittest.TestCase):
             return False
 
     def close_popup(self, url):
-        has_popup = url.startswith('https://animals-now.org/donate')
-        if not has_popup:
+        if not url.startswith('https://animals-now.org/donate'):
             print("No popup on this site")
             return
 
         driver = self.driver
-        popup = "#popup-for-double-donation-round-light-version"
-        close_btn_css = "#popup-for-double-donation-round-light-version > .mfp-close"
-        popup_exists = self.locate_popup(popup)
+        popup_css = "#popup-for-double-donation-round-light-version"
+        close_btn_css = popup_css+" > .mfp-close"
+        popup_exists = self.locate_popup(popup_css)
 
         if popup_exists:
             WebDriverWait(driver, 10).until(
