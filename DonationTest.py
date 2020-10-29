@@ -9,7 +9,8 @@ import customFunc
 
 # TODO - do we want to check elements outside of the form? for instance, above the amount buttons
 class Page:
-    def __init__(self, site_url, expected_monthy_checkbox_text, expected_donations_amount, expected_currency_symbol, expected_label_name, expected_label_phone, expected_label_email):
+    def __init__(self, site_url, expected_monthy_checkbox_text, expected_donations_amount, expected_currency_symbol,
+                 expected_label_name, expected_label_phone, expected_label_email):
         self.site_url = site_url
         self.expected_monthy_checkbox_text = expected_monthy_checkbox_text
         self.expected_donations_amount = expected_donations_amount
@@ -45,11 +46,39 @@ class DonationTest(unittest.TestCase):
         for page in pages:
             print(page.site_url)
             driver.get(page.site_url)
+            self.close_popup(page.site_url)
             self.verify_hok_label(page.expected_monthy_checkbox_text)
             self.verify_donation_buttons(page.expected_donations_amount, page.expected_currency_symbol)
             self.go_to_2nd_page()
             self.verify_texts_on_2nd_page(page.expected_label_name, page.expected_label_phone,
                                           page.expected_label_email)
+
+    def locate_popup(self, popup):
+        driver = self.driver
+        try:
+            WebDriverWait(driver, 20).until(EC.visibility_of_element_located((By.CSS_SELECTOR, popup)))
+            print("popup found")
+            return True
+        except BaseException:
+            print("no popup")
+            return False
+
+    def close_popup(self, url):
+        has_popup = url.startswith('https://animals-now.org/donate')
+        if not has_popup:
+            print("No popup on this site")
+            return
+
+        driver = self.driver
+        popup = "#popup-for-double-donation-round-light-version"
+        close_btn_css = "#popup-for-double-donation-round-light-version > .mfp-close"
+        popup_exists = self.locate_popup(popup)
+
+        if popup_exists:
+            WebDriverWait(driver, 10).until(
+                EC.element_to_be_clickable((By.CSS_SELECTOR,close_btn_css)))
+            close_btn = driver.find_element_by_css_selector(close_btn_css)
+            close_btn.click()
 
     def verify_hok_label(self, expected_monthy_checkbox_text):
         driver = self.driver
