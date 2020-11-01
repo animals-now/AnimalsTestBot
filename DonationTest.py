@@ -46,38 +46,12 @@ class DonationTest(unittest.TestCase):
         for page in pages:
             print(page.site_url)
             driver.get(page.site_url)
-            self.close_popup(page.site_url)
+            close_popup(driver, page.site_url)
             self.verify_hok_label(page.expected_monthy_checkbox_text)
             self.verify_donation_buttons(page.expected_donations_amount, page.expected_currency_symbol)
             self.go_to_2nd_page()
             self.verify_texts_on_2nd_page(page.expected_label_name, page.expected_label_phone,
                                           page.expected_label_email)
-
-    def locate_popup(self, popup):
-        driver = self.driver
-        try:
-            WebDriverWait(driver, 20).until(EC.visibility_of_element_located((By.CSS_SELECTOR, popup)))
-            print("popup found")
-            return True
-        except BaseException:
-            print("no popup")
-            return False
-
-    def close_popup(self, url):
-        if not url.startswith('https://animals-now.org/donate'):
-            print("No popup on this site")
-            return
-
-        driver = self.driver
-        popup_css = "#popup-for-double-donation-round-light-version"
-        close_btn_css = popup_css+" > .mfp-close"
-        popup_exists = self.locate_popup(popup_css)
-
-        if popup_exists:
-            WebDriverWait(driver, 10).until(
-                EC.element_to_be_clickable((By.CSS_SELECTOR,close_btn_css)))
-            close_btn = driver.find_element_by_css_selector(close_btn_css)
-            close_btn.click()
 
     def verify_hok_label(self, expected_monthy_checkbox_text):
         driver = self.driver
@@ -115,6 +89,45 @@ class DonationTest(unittest.TestCase):
 
     def tearDown(self):
         self.driver.close()
+
+
+def locate_popup(popup, driver):
+    try:
+        WebDriverWait(driver, 40).until(EC.visibility_of_element_located((By.CSS_SELECTOR, popup)))
+        print("popup found")
+        return True
+    except TimeoutError:
+        print("no popup TimeoutError")
+        return False
+    except MemoryError:
+        print("MemoryError - no popup")
+        return False
+    except AttributeError:
+        print("AttributeError - no popup")
+        return False
+    except LookupError:
+        print("LookupError - no popup")
+        return False
+    except BaseException as e:
+        print("Base Error - no popup")
+        print(e)
+        return False
+
+
+def close_popup(driver, url):
+    if not url.startswith('https://animals-now.org/'):
+        print("No popup on this site")
+        return
+
+    popup_css = "#popup-for-double-donation-round-light-version"
+    close_btn_css = popup_css + " > .mfp-close"
+    popup_exists = locate_popup(popup_css, driver)
+
+    if popup_exists:
+        WebDriverWait(driver, 10).until(
+            EC.element_to_be_clickable((By.CSS_SELECTOR, close_btn_css)))
+        close_btn = driver.find_element_by_css_selector(close_btn_css)
+        close_btn.click()
 
 
 if __name__ == "__main__":

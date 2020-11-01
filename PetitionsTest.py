@@ -1,4 +1,5 @@
 import customFunc
+from DonationTest import close_popup
 
 turkey = "https://animals-now.org/investigations/turkey/?utm_source=test&utm_medium=test&utm_campaign=test"
 live_transports = "https://animals-now.org/issues/live-transports/?utm_source=test&utm_medium=test&utm_campaign=test"
@@ -10,13 +11,23 @@ fur = "https://animals-now.org/issues/fur/?utm_source=test&utm_medium=test&utm_c
 stop_cages = "https://animals-now.org/issues/stop-cages/?utm_source=test&utm_medium=test&utm_campaign=test"
 spetember_2020 = "https://animals-now.org/investigations/investigation-september-2020/?utm_source=test&utm_medium=test&utm_campaign=test"
 
-site_list = [turkey, cages, fish, zoglobek, fur, stop_cages] # protection_act, live_transports,
+site_list = [
+    turkey,
+    cages,
+    fish,
+    zoglobek,
+    fur,
+    protection_act,
+    live_transports,
+    stop_cages
+]
 email_list = []  # list with the email used to signed up
 petitions_list = []  # list with link to petition that the bot signed up
 for site in site_list:  # sign up to petitions in the site list, for each sign up generate new info
     session = customFunc.webFunc(site)
     session.start_driver()
     session.url()
+    close_popup(session.driver, site)
     customFunc.sleep(6)
     print('petition url: "{}"'.format(site))
     session.add_my_name_to_petition()  # DELETE WHEN A/B THE IS DONE
