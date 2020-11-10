@@ -114,6 +114,7 @@ class webFunc:
         Click on "I accept the Term of use" check box in etgar22.co.il
         """
         confrim_checkbox = self.driver.find_element_by_xpath('//label[@id="tfa_168-L"]')
+        scroll_into_view(self.driver, confrim_checkbox)
         confrim_checkbox.click()
 
     def ch_confirm_sixteen(self):
@@ -238,7 +239,12 @@ class webFunc:
             button.click()
         except:
             print('Add my name to petition button not found, this button appear sometimes because its A/B test')
-         
+
+
+def scroll_into_view(driver, element):
+    print("scrolling into view element with id " + element.id)
+    driver.execute_script("arguments[0].scrollIntoView(true);", element)
+
     
 #     def healthissue(self):
 #         """
