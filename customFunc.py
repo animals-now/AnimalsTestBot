@@ -196,6 +196,7 @@ class webFunc:
         Click on "Submit/Continue" button in animals-now.org's petitions
         """
         send_button = self.driver.find_element_by_css_selector('div #form_petition-form button.frm_button_submit')
+        scroll_into_view(self.driver, send_button)
         send_button.click()
 
     def check_in_gmail(self, email_list, petitions_list):
