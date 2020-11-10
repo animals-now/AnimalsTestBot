@@ -196,7 +196,11 @@ class webFunc:
         Click on "Submit/Continue" button in animals-now.org's petitions
         """
         send_button = self.driver.find_element_by_css_selector('div #form_petition-form button.frm_button_submit')
-        scroll_into_view(self.driver, send_button)
+        # scrolling into view doesn't work in https://animals-now.org/investigations/turkey/?utm_source=test&utm_medium=test&utm_campaign=test
+        # try it - open the console and type this:
+        #   var elem = document.querySelector('div #form_petition-form button.frm_button_submit')
+        #   elem.scrollIntoView(true);
+        # scroll_into_view(self.driver, send_button)
         send_button.click()
 
     def check_in_gmail(self, email_list, petitions_list):
