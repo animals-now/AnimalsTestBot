@@ -114,7 +114,8 @@ class webFunc:
         Click on "I accept the Term of use" check box in etgar22.co.il
         """
         confrim_checkbox = self.driver.find_element_by_xpath('//label[@id="tfa_168-L"]')
-        scroll_into_view(self.driver, confrim_checkbox)
+        # this function (etgarconfirm) is used by several tests, in some it helps to scroll_into_view and in some it fails the test (i.e Etgar22FormTest.py)
+        # scroll_into_view(self.driver, confrim_checkbox)
         confrim_checkbox.click()
 
     def ch_confirm_sixteen(self):
