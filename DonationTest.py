@@ -109,8 +109,8 @@ def locate_popup(popup, driver):
         print("LookupError - no popup")
         return False
     except BaseException as e:
-        print("Base Error - no popup")
-        print(e)
+        print( type(e).__name__ + " - no popup")
+        print( "exception args: " + e.args.__str__())
         return False
 
 
