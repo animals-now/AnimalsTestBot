@@ -93,7 +93,7 @@ class DonationTest(unittest.TestCase):
 
 def locate_popup(popup, driver):
     try:
-        WebDriverWait(driver, 40).until(EC.visibility_of_element_located((By.CSS_SELECTOR, popup)))
+        WebDriverWait(driver, 90).until(EC.visibility_of_element_located((By.CSS_SELECTOR, popup)))
         print("popup found")
         return True
     except TimeoutError:
