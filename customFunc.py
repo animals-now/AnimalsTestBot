@@ -202,37 +202,7 @@ class webFunc:
         #   var elem = document.querySelector('div #form_petition-form button.frm_button_submit')
         #   elem.scrollIntoView(true);
         # scroll_into_view(self.driver, send_button)
-        send_button.click()
-
-    def check_in_gmail(self, email_list, petitions_list):
-        """
-        When petition registration success, the user's details transfer to salesforce. if salesforce receive
-        email with this form: test+???@animals-now.org, salesforce will send the user details to
-        test@animals-now.org.
-        This function search in test@animals-now.org inbox for email from saleforce
-        with the user's details, if the email not found the test failed and email about the failure will be send.
-        Also write registration detail in google sheet named 'Report'(test@animals-now.org is the owner of this sheet)
-        accept:
-        email_list - list of email that the bot used to sign ups.
-        petitions_list - list of petitions url the bot signed up.
-        """
-        service = auth.get_service_gmail()  # open gmail API client
-        client = auth.get_service_sheet()  # open google sheet API client
-        report_sheet = client.open("Report").sheet1  # open report sheet, will insert success or failure
-
-        petitions_index = 0
-        for email_address in email_list:
-            num_emails_received = emailfunc.petition_emails(service, 'me', email_address)
-            if num_emails_received == 1:
-                status = "Succeed! Salesforce email received"
-            else:
-                status = "Failed - Found " + str(num_emails_received) + " emails instead of 1"
-            row_status = [str(datetime.today())[0:16], "Petition", petitions_list[petitions_index], email_address, status]
-            report_sheet.insert_row(row_status, 2)
-            if num_emails_received != 1:
-                emailfunc.signup_failed_email(service, row_status)
-            petitions_index += 1
-            
+        send_button.click()          
 
     def add_my_name_to_petition(self):
         """
@@ -251,7 +221,31 @@ def scroll_into_view(driver, element):
     print("scrolling into view element with id " + element.id)
     driver.execute_script("arguments[0].scrollIntoView(true);", element)
 
-    
+
+class gmail_checker
+    def __init__(self):
+        self.service = auth.get_service_gmail()  # open gmail API client
+
+    def count(self,email,needle)
+        """
+        Search in user_id's email for string
+        Accept:
+        email - user's email to search in it
+        needle - string to search
+
+        Returns:
+        number of email messages found
+        """
+        try:
+            search_id = service.users().messages().list(userId=user_id, q=search_string).execute()
+            number_results = int(search_id['resultSizeEstimate'])
+
+            return number_results
+
+        except (errors.HttpError, errors):
+            return 'error: %s' % errors
+
+
 #     def healthissue(self):
 #         """
 #         Sign ups to challenges's websites with random health.

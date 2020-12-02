@@ -58,28 +58,6 @@ def signup_failed_email(service, row):
         message = create_message(sender, to, subject, message_text)
         send_message(service, user_id, message)
 
-
-def petition_emails(service, user_id, search_string):
-    """
-    Search in user_id's email for string
-    Accept:
-    service - gmail api auth
-    user_id - user's email to search in it
-    search_string - string to search
-
-    Returns:
-    number_results - number of email found in the end of the search
-    """
-    try:
-        search_id = service.users().messages().list(userId=user_id, q=search_string).execute()
-        number_results = int(search_id['resultSizeEstimate'])
-
-        return number_results
-
-    except (errors.HttpError, errors):
-        return 'Damn!..., an error has occured... %s' % errors
-
-
 def web_error_email_no_delay(service, error, site, header):
     """
     Sent failure email when website test fail.
