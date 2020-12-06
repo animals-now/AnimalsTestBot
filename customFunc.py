@@ -1,5 +1,6 @@
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
+from selenium.common.exceptions import NoSuchElementException
 import gspread
 
 from datetime import datetime
@@ -9,6 +10,7 @@ from time import sleep
 
 import emailfunc
 import sys
+
 sys.path.append('/home/maor_animals_now_org/pytest')
 import auth
 
@@ -30,14 +32,14 @@ class webFunc:
         CHROMEDRIVER_PATH = '/usr/local/bin/chromedriver'
         chrome_options = Options()
         chrome_options = webdriver.ChromeOptions()
-        chrome_options.add_argument("--window-size=1920,1080") 
+        chrome_options.add_argument("--window-size=1920,1080")
         chrome_options.add_argument("--disable-extensions")
         chrome_options.add_argument("--proxy-server='direct://'")
         chrome_options.add_argument("--proxy-bypass-list=*")
         chrome_options.add_argument("--start-maximized")
         chrome_options.add_argument('--headless')
         chrome_options.add_argument('--disable-gpu')
-   #     chrome_options.add_argument('--disable-dev-shm-usage')
+        #     chrome_options.add_argument('--disable-dev-shm-usage')
         chrome_options.add_argument('--no-sandbox')
         chrome_options.add_argument('--ignore-certificate-errors')
         self.driver = webdriver.Chrome(executable_path=CHROMEDRIVER_PATH, chrome_options=chrome_options)
@@ -101,7 +103,6 @@ class webFunc:
                 except:
                     print('Failed to send keys to: "{}" (field placeholder)'.format(real_placeholder))
 
-
     def send(self):
         """
         Click on "Submit/Continue" button in etgar22.co.il,in challenge22.com and in challenge22.com/es
@@ -126,14 +127,12 @@ class webFunc:
         sixteen_checkbox = self.driver.find_element_by_xpath('//label[@id="tfa_93-L"]')
         sixteen_checkbox.click()
 
-
     def teen_check_box(self):
         """
         Click on "I am less that 18 year old" check box in etgar22.co.il
         """
         teen_checkbox = self.driver.find_element_by_xpath('//label[@id="tfa_90-L"]')
         teen_checkbox.click()
-        
 
     def check_in_sheets(self, sheet):
         """
@@ -159,7 +158,7 @@ class webFunc:
         row_succeed_all = [time_now, self.sheet, self.site, self.email, row_success_all_msg]
         row_remove_more = [time_now, self.sheet, self.site, self.email, row_remove_more_msg]
         row_not_remove = [time_now, self.sheet, self.site, self.email, row_not_remove_msg]
-        
+
         try:
             sign_up_sheet.find(self.email)  # search if the test email found in sign up form sheet
             rows_before_delete = len(sign_up_sheet.col_values(1))
@@ -191,10 +190,10 @@ class webFunc:
             report_sheet.insert_row(row_failed, 2)  # tell us that test email didn't found in the sheet
             emailfunc.signup_failed_email(service, row_failed)
 
-
     def petitions_send(self):
         """
         Click on "Submit/Continue" button in animals-now.org's petitions
+        throws NoSuchElementException
         """
         send_button = self.driver.find_element_by_css_selector('div #form_petition-form button.frm_button_submit')
         # scrolling into view doesn't work in https://animals-now.org/investigations/turkey/?utm_source=test&utm_medium=test&utm_campaign=test
@@ -202,7 +201,7 @@ class webFunc:
         #   var elem = document.querySelector('div #form_petition-form button.frm_button_submit')
         #   elem.scrollIntoView(true);
         # scroll_into_view(self.driver, send_button)
-        send_button.click()          
+        send_button.click()
 
     def add_my_name_to_petition(self):
         """
@@ -213,8 +212,8 @@ class webFunc:
         try:
             button = self.driver.find_element_by_css_selector('div.add-me-to-petition-button a.fl-button')
             button.click()
-        except:
-            print('Add my name to petition button not found, this button appear sometimes because its A/B test')
+        except NoSuchElementException:
+            return
 
 
 def scroll_into_view(driver, element):
@@ -226,7 +225,7 @@ class gmail_checker:
     def __init__(self):
         self.service = auth.get_service_gmail()  # open gmail API client
 
-    def count(self,email,needle):
+    def count(self, email, needle):
         """
         Search in user_id's email for string
         Accept:
@@ -244,7 +243,6 @@ class gmail_checker:
 
         except (errors.HttpError, errors):
             return 'error: %s' % errors
-
 
 #     def healthissue(self):
 #         """
@@ -310,4 +308,8 @@ class gmail_checker:
 #         age_box = self.driver.find_element_by_xpath('//select[@placeholder="שנת לידה"]')
 #         age_box.click()
 #         select_age = self.driver.find_element_by_xpath('//option[@value="{}"]'.format(randint(1930, 2004)))
-#         select_age.click()            
+#         select_age.click()
+
+
+def log_date():
+    return str(datetime.today())[0:16] + " "

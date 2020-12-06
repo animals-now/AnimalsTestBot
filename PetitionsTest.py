@@ -1,9 +1,9 @@
 import unittest
 import customFunc
-from customFunc import gmail_checker
-from datetime import datetime
+from customFunc import gmail_checker, log_date
 from DonationTest import close_popup
 from time import sleep
+from selenium.common.exceptions import NoSuchElementException
 
 
 class DonationTest(unittest.TestCase):
@@ -17,7 +17,7 @@ class DonationTest(unittest.TestCase):
         "zoglobek": "https://animals-now.org/issues/zoglobek-lawsuit/?utm_source=test&utm_medium=test&utm_campaign=test",
         "fur": "https://animals-now.org/issues/fur/?utm_source=test&utm_medium=test&utm_campaign=test",
         "stop_cages": "https://animals-now.org/issues/stop-cages/?utm_source=test&utm_medium=test&utm_campaign=test",
-        "september_2020": "https://animals-now.org/investigations/investigation-september-2020/?utm_source=test&utm_medium=test&utm_campaign=test",
+        #"september_2020": "https://animals-now.org/investigations/investigation-september-2020/?utm_source=test&utm_medium=test&utm_campaign=test",
     }
 
     def test_signing(self):
@@ -30,7 +30,14 @@ class DonationTest(unittest.TestCase):
         results = [] # list with (email used to signed up,petition_name,petition_url)
         failed = [] # list of failed signups
         for petition_name in self.url_list: # sign up to petitions in the site list, for each sign up generate new info
-            results.append(self.sign(petition_name, self.url_list[petition_name], 6, 3))
+            try:
+                petition_url = self.url_list[petition_name]
+                result = self.sign(petition_name, petition_url, 6, 3)
+                results.append(result)
+            except NoSuchElementException:
+                failed.append(log_date() + petition_name + ": element not found. " + petition_url)
+            except Exception as Err:
+                failed.append(log_date() + petition_name + ": " + str(Err) + " " + petition_url)
 
         first_email = next(iter(results[0]))
 
@@ -51,7 +58,7 @@ class DonationTest(unittest.TestCase):
             (email_address, petition_name, petition_url) = result
             num_emails_received = gmail.count(email_address, 'me')
             if num_emails_received != 1:
-                failed.append(str(datetime.today())[0:16] + petition_name + " emails received: " + str(num_emails_received) + " link " + petition_url)
+                failed.append(log_date() + petition_name + " emails received: " + str(num_emails_received) + " link " + petition_url)
 
         self.assertFalse(failed)
 
