@@ -35,7 +35,7 @@ class webFunc:
         chrome_options.add_argument("--proxy-server='direct://'")
         chrome_options.add_argument("--proxy-bypass-list=*")
         chrome_options.add_argument("--start-maximized")
-        chrome_options.add_argument('--headless')
+        # chrome_options.add_argument('--headless')
         chrome_options.add_argument('--disable-gpu')
    #     chrome_options.add_argument('--disable-dev-shm-usage')
         chrome_options.add_argument('--no-sandbox')
@@ -222,11 +222,11 @@ def scroll_into_view(driver, element):
     driver.execute_script("arguments[0].scrollIntoView(true);", element)
 
 
-class gmail_checker
+class gmail_checker:
     def __init__(self):
         self.service = auth.get_service_gmail()  # open gmail API client
 
-    def count(self,email,needle)
+    def count(self,email,needle):
         """
         Search in user_id's email for string
         Accept:
