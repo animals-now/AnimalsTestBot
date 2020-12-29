@@ -146,7 +146,9 @@ def web_error_email(error_type, service, error, site, header):
         web_error_email_no_delay(service,
                                  (str(error) + ". Also JSON file failed - no delay between emails(code problem)")
                                  , site, str(header))
-
+                    #if the site is veg send to Roni also mail
+        if 'veg' in site:
+            veg_error_email_no_delay_roni(service, str(error), site, str(header))
 
 def reset_error_counter(error_type, service, site):
     """
