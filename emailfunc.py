@@ -93,6 +93,21 @@ def web_error_email_no_delay(service, error, site, header):
     for to in to_list:
         message = create_message(sender, to, subject, message_text)
         send_message(service, user_id, message)
+        
+# this function here to send Roni email when veg fail,
+#I know its stuipd and bad code to dublicate the function
+# but I its the faster way to do that.
+def veg_error_email_no_delay_roni(service, error, site, header):
+    message_text = "Error: " + error + ", Website: " + site + ", header: " + header
+    sender = "me"
+    subject = "WebSite Error"
+    to_list = ["roni@animals-now.org"]
+    user_id = "me"
+    for to in to_list:
+        message = create_message(sender, to, subject, message_text)
+        send_message(service, user_id, message)
+
+
 
 
 json_path = '/home/maor_animals_now_org/pytest/error_status.json'
@@ -114,6 +129,10 @@ def web_error_email(error_type, service, error, site, header):
 
         if data[site][error_type] == 0:
             web_error_email_no_delay(service, str(error), site, str(header))
+            #if the site is veg send to Roni also mail
+            if 'veg' in site:
+                veg_error_email_no_delay_roni(service, str(error), site, str(header))
+            # session to wait between each email
             data[site][error_type] = 1
             with open(json_path, 'w+') as f:
                 f.write(json.dumps(data))
