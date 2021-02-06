@@ -46,7 +46,7 @@ class DonationTest(unittest.TestCase):
         for page in pages:
             print(page.site_url)
             driver.get(page.site_url)
-            close_popup(driver, page.site_url)
+            # close_popup(driver, page.site_url) ## this is only relevant when the double-donation popup is on
             self.verify_hok_label(page.expected_monthy_checkbox_text)
             self.verify_donation_buttons(page.expected_donations_amount, page.expected_currency_symbol)
             self.go_to_2nd_page()

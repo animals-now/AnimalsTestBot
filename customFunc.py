@@ -1,5 +1,6 @@
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
+from selenium.common.exceptions import NoSuchElementException
 import gspread
 
 from datetime import datetime
@@ -9,6 +10,7 @@ from time import sleep
 
 import emailfunc
 import sys
+
 sys.path.append('/home/maor_animals_now_org/pytest')
 import auth
 
@@ -30,14 +32,14 @@ class webFunc:
         CHROMEDRIVER_PATH = '/usr/local/bin/chromedriver'
         chrome_options = Options()
         chrome_options = webdriver.ChromeOptions()
-        chrome_options.add_argument("--window-size=1920,1080") 
+        chrome_options.add_argument("--window-size=1920,1080")
         chrome_options.add_argument("--disable-extensions")
         chrome_options.add_argument("--proxy-server='direct://'")
         chrome_options.add_argument("--proxy-bypass-list=*")
         chrome_options.add_argument("--start-maximized")
         chrome_options.add_argument('--headless')
         chrome_options.add_argument('--disable-gpu')
-   #     chrome_options.add_argument('--disable-dev-shm-usage')
+        #     chrome_options.add_argument('--disable-dev-shm-usage')
         chrome_options.add_argument('--no-sandbox')
         chrome_options.add_argument('--ignore-certificate-errors')
         self.driver = webdriver.Chrome(executable_path=CHROMEDRIVER_PATH, chrome_options=chrome_options)
@@ -101,7 +103,6 @@ class webFunc:
                 except:
                     print('Failed to send keys to: "{}" (field placeholder)'.format(real_placeholder))
 
-
     def send(self):
         """
         Click on "Submit/Continue" button in etgar22.co.il,in challenge22.com and in challenge22.com/es
@@ -126,14 +127,12 @@ class webFunc:
         sixteen_checkbox = self.driver.find_element_by_xpath('//label[@id="tfa_93-L"]')
         sixteen_checkbox.click()
 
-
     def teen_check_box(self):
         """
         Click on "I am less that 18 year old" check box in etgar22.co.il
         """
         teen_checkbox = self.driver.find_element_by_xpath('//label[@id="tfa_90-L"]')
         teen_checkbox.click()
-        
 
     def check_in_sheets(self, sheet):
         """
@@ -159,7 +158,7 @@ class webFunc:
         row_succeed_all = [time_now, self.sheet, self.site, self.email, row_success_all_msg]
         row_remove_more = [time_now, self.sheet, self.site, self.email, row_remove_more_msg]
         row_not_remove = [time_now, self.sheet, self.site, self.email, row_not_remove_msg]
-        
+
         try:
             sign_up_sheet.find(self.email)  # search if the test email found in sign up form sheet
             rows_before_delete = len(sign_up_sheet.col_values(1))
@@ -191,10 +190,10 @@ class webFunc:
             report_sheet.insert_row(row_failed, 2)  # tell us that test email didn't found in the sheet
             emailfunc.signup_failed_email(service, row_failed)
 
-
     def petitions_send(self):
         """
         Click on "Submit/Continue" button in animals-now.org's petitions
+        throws NoSuchElementException
         """
         send_button = self.driver.find_element_by_css_selector('div #form_petition-form button.frm_button_submit')
         # scrolling into view doesn't work in https://animals-now.org/investigations/turkey/?utm_source=test&utm_medium=test&utm_campaign=test
@@ -203,36 +202,6 @@ class webFunc:
         #   elem.scrollIntoView(true);
         # scroll_into_view(self.driver, send_button)
         send_button.click()
-
-    def check_in_gmail(self, email_list, petitions_list):
-        """
-        When petition registration success, the user's details transfer to salesforce. if salesforce receive
-        email with this form: test+???@animals-now.org, salesforce will send the user details to
-        test@animals-now.org.
-        This function search in test@animals-now.org inbox for email from saleforce
-        with the user's details, if the email not found the test failed and email about the failure will be send.
-        Also write registration detail in google sheet named 'Report'(test@animals-now.org is the owner of this sheet)
-        accept:
-        email_list - list of email that the bot used to sign ups.
-        petitions_list - list of petitions url the bot signed up.
-        """
-        service = auth.get_service_gmail()  # open gmail API client
-        client = auth.get_service_sheet()  # open google sheet API client
-        report_sheet = client.open("Report").sheet1  # open report sheet, will insert success or failure
-
-        petitions_index = 0
-        for email_address in email_list:
-            num_emails_received = emailfunc.petition_emails(service, 'me', email_address)
-            if num_emails_received == 1:
-                status = "Succeed! Salesforce email received"
-            else:
-                status = "Failed - Found " + str(num_emails_received) + " emails instead of 1"
-            row_status = [str(datetime.today())[0:16], "Petition", petitions_list[petitions_index], email_address, status]
-            report_sheet.insert_row(row_status, 2)
-            if num_emails_received != 1:
-                emailfunc.signup_failed_email(service, row_status)
-            petitions_index += 1
-            
 
     def add_my_name_to_petition(self):
         """
@@ -243,15 +212,38 @@ class webFunc:
         try:
             button = self.driver.find_element_by_css_selector('div.add-me-to-petition-button a.fl-button')
             button.click()
-        except:
-            print('Add my name to petition button not found, this button appear sometimes because its A/B test')
+        except NoSuchElementException:
+            return
 
 
 def scroll_into_view(driver, element):
     print("scrolling into view element with id " + element.id)
     driver.execute_script("arguments[0].scrollIntoView(true);", element)
 
-    
+
+class gmail_checker:
+    def __init__(self):
+        self.service = auth.get_service_gmail()  # open gmail API client
+
+    def count(self, email, needle):
+        """
+        Search in user_id's email for string
+        Accept:
+        email - user's email to search in it
+        needle - string to search
+
+        Returns:
+        number of email messages found
+        """
+        try:
+            search_id = service.users().messages().list(userId=user_id, q=search_string).execute()
+            number_results = int(search_id['resultSizeEstimate'])
+
+            return number_results
+
+        except (errors.HttpError, errors):
+            return 'error: %s' % errors
+
 #     def healthissue(self):
 #         """
 #         Sign ups to challenges's websites with random health.
@@ -316,4 +308,8 @@ def scroll_into_view(driver, element):
 #         age_box = self.driver.find_element_by_xpath('//select[@placeholder="שנת לידה"]')
 #         age_box.click()
 #         select_age = self.driver.find_element_by_xpath('//option[@value="{}"]'.format(randint(1930, 2004)))
-#         select_age.click()            
+#         select_age.click()
+
+
+def log_date():
+    return str(datetime.today())[0:16] + " "
