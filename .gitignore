@@ -1,0 +1,7 @@
+#Ignore local ide related pycharm files.
+.idea/
+venv/
+
+#Ignore mac backup files.
+.DS_Store
+__pycache__/

@@ -27,7 +27,7 @@ for site in site_list:  # sign up to petitions in the site list, for each sign u
     session = customFunc.webFunc(site)
     session.start_driver()
     session.url()
-    close_popup(session.driver, site)
+    # close_popup(session.driver, site)
     customFunc.sleep(6)
     print('petition url: "{}"'.format(site))
     session.add_my_name_to_petition()  # DELETE WHEN A/B THE IS DONE
@@ -36,6 +36,8 @@ for site in site_list:  # sign up to petitions in the site list, for each sign u
     session.insert_info_to_field('LastName', session.last_name)
     session.insert_info_to_field('Email', session.email)
     session.insert_info_to_field('Phone', session.phone)
+    # session.insert_info_to_field('Birthday', session.year_of_birth_idx)
+    session.petitions_age()
     session.petitions_send()
     email_list.append(session.email)
     petitions_list.append(site)

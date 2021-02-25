@@ -21,6 +21,7 @@ class webFunc:
         self.last_name = webFunc.random_char(5) + str(randint(1, 999))
         self.email = self.first_name + self.last_name + "@animals-now.org"
         self.phone = "067" + str(randint(1000000, 9999999))
+        self.year_of_birth = ""
         self.info = [self.first_name, self.last_name, self.email, self.phone]
 
     def start_driver(self):
@@ -82,7 +83,7 @@ class webFunc:
                             'Phone': ['טלפון', 'נייד', 'Phone', 'phone', 'Mobile', 'mobile', 'Teléfono', 'teléfono',
                                       'Móvil', 'móvil'],
                             'Age': ['גיל', 'Age', 'age', 'Años', 'años'],
-                            'Birthday': ['שנת לידה', 'Birthday', 'birthday', 'Cumpleaños', 'cumpleaños'],
+                            'Birthday': ['שנת לידה', 'Birthday', 'birthday', 'Year', 'year', 'Cumpleaños', 'cumpleaños'],
                             'FullName': ['שם מלא', 'שם', 'Full name', 'full name', 'Name', 'name',
                                          'Nombre completo', 'nombre completo', 'Nombre', 'nombre'],
                             }
@@ -247,11 +248,25 @@ class webFunc:
             print('Add my name to petition button not found, this button appear sometimes because its A/B test')
 
 
-def scroll_into_view(driver, element):
-    print("scrolling into view element with id " + element.id)
-    driver.execute_script("arguments[0].scrollIntoView(true);", element)
+    def scroll_into_view(driver, element):
+        print("scrolling into view element with id " + element.id)
+        driver.execute_script("arguments[0].scrollIntoView(true);", element)
 
-    
+
+    def petitions_age(self):
+        """
+        Choose random birthday from the scroll in animals-now.org's petitions
+        """
+        if self.driver.find_element_by_xpath('//select[@placeholder="שנת לידה"]'):
+            age_box = self.driver.find_element_by_xpath('//select[@placeholder="שנת לידה"]')
+        else:
+            age_box = self.driver.find_element_by_xpath('//select[@placeholder="Year of Birth"]')
+
+        age_box.click()
+        select_age = self.driver.find_element_by_xpath('//option[@value="{}"]'.format(randint(1930, 2004)))
+        select_age.click()
+        self.year_of_birth = select_age
+
 #     def healthissue(self):
 #         """
 #         Sign ups to challenges's websites with random health.
@@ -316,4 +331,4 @@ def scroll_into_view(driver, element):
 #         age_box = self.driver.find_element_by_xpath('//select[@placeholder="שנת לידה"]')
 #         age_box.click()
 #         select_age = self.driver.find_element_by_xpath('//option[@value="{}"]'.format(randint(1930, 2004)))
-#         select_age.click()            
+#         select_age.click()
