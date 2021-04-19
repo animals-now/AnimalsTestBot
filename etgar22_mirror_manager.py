@@ -170,9 +170,8 @@ except ConnectionError as err:
     connection_error_description = "Connection Exception"
     print ("Can't connect to " + etgar22_original_ip_url + " - " + str(err))
 
-
-    found_connection_error = False;
-    connection_error_description = "Manual";
+found_connection_error = False;
+connection_error_description = "Manual";
     
 if found_connection_error:
 
