@@ -170,16 +170,6 @@ except ConnectionError as err:
     connection_error_description = "Connection Exception"
     print ("Can't connect to " + etgar22_original_ip_url + " - " + str(err))
 
-#found_connection_error = True;
-#connection_error_description = "Manual";
-
-params_to_send = {
-    "code": mirror_etgar22_code,
-    "do_mirror": "1"
-}
-result_from_monitor = requests.post(do_mirror_url, data = params_to_send, verify=False)
-
-    
 if found_connection_error:
 
     state['last_error'] = connection_error_description
