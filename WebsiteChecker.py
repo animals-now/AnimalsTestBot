@@ -5,8 +5,8 @@ import random
 import time
 
 # If you add website, also add it in the error_status.json that located in the server
-fish = "https://fish.org.il/"
-etgar = "https://etgar22.co.il/"
+fish = "https://fish.org.ild/"
+etgar = "https://etgar22.co.dil/"
 ch = "https://challenge22.com/"
 animals = "https://animals-now.org/"
 anonymous = "https://anonymous.org.il/"
@@ -45,12 +45,13 @@ for site in site_list:
     # First test, send get request if get error or the srv take more then 30 second to response - Fail
     start = time.time()
     try:
-        for failure_counter in range(0, 3):
+        failure_counter = 0
+        for loop_counter in range(0, 3):
             request = requests.get(site, headers=header)
             if request.status_code == 200:
                 customFunc.emailfunc.reset_error_counter('CodeError', service, site)
             else:
-                failure_counter += 1
+                loop_counter += 1
 
         if failure_counter != 3:
             customFunc.emailfunc.reset_error_counter('ConnectionError', service, site)
