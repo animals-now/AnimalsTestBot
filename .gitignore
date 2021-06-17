@@ -5,3 +5,9 @@ venv/
 #Ignore mac backup files.
 .DS_Store
 __pycache__/
+
+#Ignore secret files and two files that are different from production code
+token.pickle
+
+# Misc
+only-local-error-status-json
