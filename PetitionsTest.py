@@ -7,7 +7,6 @@ cages = "https://animals-now.org/issues/cages/?utm_source=test&utm_medium=test&u
 protection_act = "https://animals-now.org/issues/animal-protection-act/?utm_source=test&utm_medium=test&utm_campaign=test"
 fish = "https://animals-now.org/investigations/fish/?utm_source=test&utm_medium=test&utm_campaign=test"
 zoglobek = "https://animals-now.org/issues/zoglobek-lawsuit/?utm_source=test&utm_medium=test&utm_campaign=test"
-fur = "https://animals-now.org/issues/fur/?utm_source=test&utm_medium=test&utm_campaign=test"
 stop_cages = "https://animals-now.org/issues/stop-cages/?utm_source=test&utm_medium=test&utm_campaign=test"
 spetember_2020 = "https://animals-now.org/investigations/investigation-september-2020/?utm_source=test&utm_medium=test&utm_campaign=test"
 
@@ -16,7 +15,6 @@ site_list = [
     cages,
     fish,
     zoglobek,
-    fur,
     protection_act,
     live_transports,
     stop_cages
